@@ -34,6 +34,7 @@
                                        value="{{ old('email') }}"
                                        placeholder="nama@email.com"
                                        required
+                                       autocomplete="email"
                                        autofocus>
                                 <div class="input-icon">
                                     <i class="fas fa-envelope"></i>
