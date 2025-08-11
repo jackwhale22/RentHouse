@@ -15,13 +15,13 @@
                                     <i class="fas fa-building"></i>
                                 </div>
                                 <div class="header-text">
-                                    <h1 class="page-title">Kos Saya</h1>
-                                    <p class="page-subtitle">Kelola semua listing kos Anda dalam satu tempat</p>
+                                    <h1 class="page-title">Kontrakan Saya</h1>
+                                    <p class="page-subtitle">Kelola semua listing kontrakan Anda dalam satu tempat</p>
                                 </div>
                             </div>
                             <div class="header-actions">
                                 <a href="{{ route('pemilik.kos.create') }}" class="glass-btn glass-btn-primary">
-                                    <i class="fas fa-plus me-2"></i>Tambah Kos Baru
+                                    <i class="fas fa-plus me-2"></i>Tambah Kontrakan Baru
                                 </a>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                             <div class="stats-summary">
                                 <div class="stat-item">
                                     <span class="stat-value">{{ $kosList->total() }}</span>
-                                    <span class="stat-label">Total Kos</span>
+                                    <span class="stat-label">Total Kontrakan</span>
                                 </div>
                                 <div class="stat-divider"></div>
                                 <div class="stat-item">

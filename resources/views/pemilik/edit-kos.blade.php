@@ -141,6 +141,67 @@
                                             </div>
                                         </div>
 
+                                        <!-- Map Coordinates -->
+                                        <div class="col-md-6">
+                                            <div class="glass-form-group">
+                                                <label for="latitude" class="glass-label">
+                                                    <i class="fas fa-map-pin me-2"></i>Latitude
+                                                </label>
+                                                <div class="glass-input-wrapper">
+                                                    <input type="number"
+                                                           step="any"
+                                                           class="glass-input @error('latitude') is-invalid @enderror"
+                                                           id="latitude"
+                                                           name="latitude"
+                                                           value="{{ old('latitude', $kos->latitude) }}"
+                                                           placeholder="-6.2088">
+                                                    <div class="input-icon">
+                                                        <i class="fas fa-map-marker"></i>
+                                                    </div>
+                                                </div>
+                                                @error('latitude')
+                                                    <div class="glass-error">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="glass-form-group">
+                                                <label for="longitude" class="glass-label">
+                                                    <i class="fas fa-map-pin me-2"></i>Longitude
+                                                </label>
+                                                <div class="glass-input-wrapper">
+                                                    <input type="number"
+                                                           step="any"
+                                                           class="glass-input @error('longitude') is-invalid @enderror"
+                                                           id="longitude"
+                                                           name="longitude"
+                                                           value="{{ old('longitude', $kos->longitude) }}"
+                                                           placeholder="106.8456">
+                                                    <div class="input-icon">
+                                                        <i class="fas fa-map-marker"></i>
+                                                    </div>
+                                                </div>
+                                                @error('longitude')
+                                                    <div class="glass-error">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <!-- Map Preview -->
+                                        <div class="col-12">
+                                            <div class="glass-form-group">
+                                                <label class="glass-label">
+                                                    <i class="fas fa-map me-2"></i>Lokasi di Peta
+                                                </label>
+                                                <div id="map" style="height: 300px; border-radius: 15px; margin-top: 10px;"></div>
+                                                <div class="input-help">
+                                                    <i class="fas fa-lightbulb me-1"></i>
+                                                    Klik pada peta untuk mengubah lokasi atau masukkan koordinat secara manual
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6">
                                             <div class="glass-form-group">
                                                 <label for="harga" class="glass-label">
@@ -259,50 +320,128 @@
                                     </div>
 
                                     <div class="photo-upload-section">
-                                        @if($kos->foto)
-                                            <div class="current-photo">
-                                                <div class="photo-container">
-                                                    <img src="{{ asset($kos->foto) }}"
-                                                         alt="{{ $kos->nama_kos }}"
-                                                         class="current-photo-img"
-                                                         id="currentPhoto">
-                                                    <div class="photo-overlay">
-                                                        <div class="photo-info">
-                                                            <i class="fas fa-image"></i>
-                                                            <span>Foto Saat Ini</span>
+                                        <!-- Foto Utama -->
+                                        <div class="main-photo-section mb-4">
+                                            <h6 class="photo-section-title">Foto Utama</h6>
+                                            @if($kos->mainPhoto)
+                                                <div class="current-photo">
+                                                    <div class="photo-container">
+                                                        <img src="{{ url($kos->mainPhoto->foto_path) }}"
+                                                             alt="{{ $kos->nama_kos }}"
+                                                             class="current-photo-img"
+                                                             id="currentMainPhoto">
+                                                        <div class="photo-overlay">
+                                                            <div class="photo-info">
+                                                                <i class="fas fa-image"></i>
+                                                                <span>Foto Utama Saat Ini</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endif
+                                            @endif
 
                                         <div class="glass-form-group">
-                                            <label for="foto" class="glass-label">
-                                                <i class="fas fa-upload me-2"></i>Upload Foto Baru
+                                            <label for="foto_utama" class="glass-label">
+                                                <i class="fas fa-upload me-2"></i>Ganti Foto Utama
                                             </label>
                                             <div class="glass-file-wrapper">
                                                 <input type="file"
-                                                       class="glass-file-input @error('foto') is-invalid @enderror"
-                                                       id="foto"
-                                                       name="foto"
+                                                       class="glass-file-input @error('foto_utama') is-invalid @enderror"
+                                                       id="foto_utama"
+                                                       name="foto_utama"
                                                        accept="image/*"
-                                                       onchange="previewImage(this)">
-                                                <label for="foto" class="glass-file-label">
+                                                       onchange="previewMainPhoto(this)">
+                                                <label for="foto_utama" class="glass-file-label">
                                                     <div class="file-upload-content">
                                                         <i class="fas fa-cloud-upload-alt file-icon"></i>
                                                         <div class="file-text">
-                                                            <span class="file-main">Pilih foto baru</span>
+                                                            <span class="file-main">Pilih foto utama baru</span>
                                                             <span class="file-sub">atau drag & drop di sini</span>
                                                         </div>
                                                     </div>
                                                 </label>
                                                 <div class="file-info">
-                                                    Upload foto baru untuk mengganti foto saat ini (max 2MB, format: JPEG, PNG, JPG, GIF)
+                                                    Upload foto utama baru (max 2MB, format: JPEG, PNG, JPG, GIF)
                                                 </div>
                                             </div>
-                                            @error('foto')
+                                            @error('foto_utama')
                                                 <div class="glass-error">{{ $message }}</div>
                                             @enderror
+                                        </div>
+
+                                        <!-- Preview Foto Utama Baru -->
+                                        <div class="photo-preview" id="mainPhotoPreview" style="display: none;">
+                                            <div class="preview-container">
+                                                <img id="mainPreviewImg" class="preview-img" alt="Preview Foto Utama">
+                                                <div class="preview-overlay">
+                                                    <div class="preview-info">
+                                                        <i class="fas fa-eye"></i>
+                                                        <span>Preview Foto Utama Baru</span>
+                                                    </div>
+                                                    <button type="button" class="remove-preview" onclick="removeMainPhotoPreview()">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Foto Tambahan -->
+                                    <div class="additional-photos-section mb-4">
+                                        <h6 class="photo-section-title">Foto Tambahan</h6>
+
+                                        <!-- Foto Tambahan Yang Sudah Ada -->
+                                        <div class="current-photos mb-3">
+                                            <div class="photos-grid" id="currentPhotosGrid">
+                                                @foreach($kos->photos->where('is_main', false) as $photo)
+                                                    <div class="photo-item" data-photo-id="{{ $photo->id }}">
+                                                        <img src="{{ url($photo->foto_path) }}"
+                                                             alt="Foto Tambahan"
+                                                             class="photo-img">
+                                                        <div class="photo-overlay">
+                                                            <button type="button" class="remove-photo" onclick="deleteExistingPhoto({{ $photo->id }})">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+
+                                        <!-- Form Upload Foto Tambahan -->
+                                        <div class="glass-form-group">
+                                            <label for="foto" class="glass-label">
+                                                <i class="fas fa-upload me-2"></i>Tambah Foto Lainnya
+                                            </label>
+                                            <div class="glass-file-wrapper">
+                                                <input type="file"
+                                                       class="glass-file-input @error('foto.*') is-invalid @enderror"
+                                                       id="foto"
+                                                       name="foto[]"
+                                                       accept="image/*"
+                                                       multiple
+                                                       onchange="previewAdditionalPhotos(this)">
+                                                <label for="foto" class="glass-file-label">
+                                                    <div class="file-upload-content">
+                                                        <i class="fas fa-images file-icon"></i>
+                                                        <div class="file-text">
+                                                            <span class="file-main">Pilih beberapa foto tambahan</span>
+                                                            <span class="file-sub">atau drag & drop di sini (max 5 foto)</span>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <div class="file-info">
+                                                    Upload foto tambahan (max 2MB per foto, format: JPEG, PNG, JPG, GIF)
+                                                </div>
+                                            </div>
+                                            @error('foto.*')
+                                                <div class="glass-error">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <!-- Preview Foto Tambahan -->
+                                        <div class="photos-preview" id="additionalPhotosPreview">
+                                            <!-- Preview foto tambahan akan ditampilkan di sini -->
                                         </div>
 
                                         <!-- Photo Preview -->

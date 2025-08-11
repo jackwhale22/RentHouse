@@ -51,6 +51,26 @@
                         </div>
                     </div>
 
+                    <!-- Photo Gallery -->
+                    @if($kos->photos && $kos->photos->count() > 1)
+                    <div class="photo-gallery">
+                        <div class="photo-gallery-grid">
+                            @foreach($kos->photos->where('is_main', 0)->take(4) as $photo)
+                                <div class="gallery-item">
+                                    <img src="{{ asset($photo->foto_path) }}"
+                                         alt="Foto {{ $kos->nama_kos }}"
+                                         class="gallery-image">
+                                </div>
+                            @endforeach
+                        </div>
+                        @if($kos->photos->where('is_main', 0)->count() > 4)
+                            <div class="more-photos">
+                                <span>+{{ $kos->photos->where('is_main', 0)->count() - 4 }} foto lainnya</span>
+                            </div>
+                        @endif
+                    </div>
+                    @endif
+
                     <!-- Kos Content -->
                     <div class="kos-main-content">
                         <div class="kos-header mb-4">

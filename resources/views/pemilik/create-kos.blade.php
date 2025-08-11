@@ -15,13 +15,13 @@
                                     <i class="fas fa-plus-circle"></i>
                                 </div>
                                 <div class="header-text">
-                                    <h1 class="page-title">Tambah Kos Baru</h1>
-                                    <p class="page-subtitle">Buat listing kos baru dan jangkau ribuan calon penyewa</p>
+                                    <h1 class="page-title">Tambah Kontrakan Baru</h1>
+                                    <p class="page-subtitle">Buat listing kontrakan baru dan jangkau ribuan calon penyewa</p>
                                 </div>
                             </div>
                             <div class="header-actions">
                                 <a href="{{ route('pemilik.my-kos') }}" class="glass-btn glass-btn-outline">
-                                    <i class="fas fa-arrow-left me-2"></i>Kembali ke Kos Saya
+                                    <i class="fas fa-arrow-left me-2"></i>Kembali ke Kontrakan Saya
                                 </a>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
 
                                 <div class="form-group">
                                     <label for="nama_kos" class="glass-label required">
-                                        <i class="fas fa-home me-2"></i>Nama Kos
+                                        <i class="fas fa-home me-2"></i>Nama Kontrakan
                                     </label>
                                     <div class="glass-input-wrapper">
                                         <input type="text"
@@ -115,6 +115,70 @@
                                     <div class="input-help">
                                         <i class="fas fa-lightbulb me-1"></i>
                                         Sertakan alamat lengkap dengan nama jalan dan kota
+                                    </div>
+                                </div>
+
+                                <!-- Map Coordinates -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="latitude" class="glass-label">
+                                                <i class="fas fa-map-pin me-2"></i>Latitude
+                                            </label>
+                                            <div class="glass-input-wrapper">
+                                                <input type="number"
+                                                       step="any"
+                                                       class="glass-input @error('latitude') is-invalid @enderror"
+                                                       id="latitude"
+                                                       name="latitude"
+                                                       value="{{ old('latitude') }}"
+                                                       placeholder="-6.2088">
+                                                <div class="input-icon">
+                                                    <i class="fas fa-map-marker"></i>
+                                                </div>
+                                            </div>
+                                            @error('latitude')
+                                                <div class="glass-error">
+                                                    <i class="fas fa-exclamation-circle me-2"></i>{{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="longitude" class="glass-label">
+                                                <i class="fas fa-map-pin me-2"></i>Longitude
+                                            </label>
+                                            <div class="glass-input-wrapper">
+                                                <input type="number"
+                                                       step="any"
+                                                       class="glass-input @error('longitude') is-invalid @enderror"
+                                                       id="longitude"
+                                                       name="longitude"
+                                                       value="{{ old('longitude') }}"
+                                                       placeholder="106.8456">
+                                                <div class="input-icon">
+                                                    <i class="fas fa-map-marker"></i>
+                                                </div>
+                                            </div>
+                                            @error('longitude')
+                                                <div class="glass-error">
+                                                    <i class="fas fa-exclamation-circle me-2"></i>{{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Map Preview -->
+                                <div class="form-group">
+                                    <label class="glass-label">
+                                        <i class="fas fa-map me-2"></i>Preview Lokasi di Peta
+                                    </label>
+                                    <div id="map" style="height: 300px; border-radius: 15px; margin-top: 10px;"></div>
+                                    <div class="input-help">
+                                        <i class="fas fa-lightbulb me-1"></i>
+                                        Klik pada peta untuk mengatur lokasi atau masukkan koordinat secara manual
                                     </div>
                                 </div>
 
@@ -194,7 +258,7 @@
                                             <span class="suggestion-tag" onclick="addFacility('Lemari')">Lemari</span>
                                             <span class="suggestion-tag" onclick="addFacility('Meja Belajar')">Meja Belajar</span>
                                             <span class="suggestion-tag" onclick="addFacility('Kursi')">Kursi</span>
-                                            <span class="suggestion-tag" onclick="addFacility('Parkir Motor')">Parkir Motor</span>
+                                            <span class="suggestion-tag" onclick="addFacility('Garasi')">Garasi</span>
                                         </div>
                                     </div>
                                 </div>
@@ -224,53 +288,81 @@
                                     </div>
                                 </div>
 
+                                <!-- Foto Utama -->
                                 <div class="form-group">
-                                    <label for="foto" class="glass-label">
-                                        <i class="fas fa-camera me-2"></i>Foto Kos
+                                    <label class="glass-label required">
+                                        <i class="fas fa-camera me-2"></i>Foto Utama Kontrakan
                                     </label>
-                                    <div class="glass-file-upload" id="fileUpload">
+                                    <div class="glass-file-upload" id="mainPhotoUpload">
                                         <input type="file"
-                                               class="file-input @error('foto') is-invalid @enderror"
-                                               id="foto"
-                                               name="foto"
-                                               accept="image/*">
+                                               class="file-input @error('foto_utama') is-invalid @enderror"
+                                               id="fotoUtama"
+                                               name="foto_utama"
+                                               accept="image/*"
+                                               required>
                                         <div class="upload-area">
                                             <div class="upload-icon">
                                                 <i class="fas fa-cloud-upload-alt"></i>
                                             </div>
                                             <div class="upload-text">
-                                                <p class="upload-title">Klik atau seret foto ke sini</p>
+                                                <p class="upload-title">Klik atau seret foto utama ke sini</p>
                                                 <p class="upload-subtitle">Format: JPEG, PNG, JPG, GIF (Maks. 2MB)</p>
                                             </div>
                                         </div>
-                                        <div class="image-preview" id="imagePreview" style="display: none;">
-                                            <img id="previewImg" src="" alt="Preview">
-                                            <button type="button" class="remove-image" onclick="removeImage()">
+                                        <div class="image-preview" id="mainImagePreview" style="display: none;">
+                                            <img id="mainPreviewImg" src="" alt="Preview">
+                                            <span class="main-photo-badge">Foto Utama</span>
+                                            <button type="button" class="remove-image" onclick="removeMainPhoto()">
                                                 <i class="fas fa-times"></i>
                                             </button>
                                         </div>
                                     </div>
-                                    @error('foto')
+                                    @error('foto_utama')
                                         <div class="glass-error">
                                             <i class="fas fa-exclamation-circle me-2"></i>{{ $message }}
                                         </div>
                                     @enderror
                                     <div class="input-help">
                                         <i class="fas fa-lightbulb me-1"></i>
-                                        Foto yang menarik akan meningkatkan minat calon penyewa
+                                        Foto utama akan menjadi foto yang pertama dilihat oleh calon penyewa
                                     </div>
                                 </div>
 
-                                <div class="step-navigation">
-                                    <button type="button" class="glass-btn glass-btn-outline prev-step">
-                                        <i class="fas fa-arrow-left me-2"></i>Sebelumnya
-                                    </button>
-                                    <button type="button" class="glass-btn glass-btn-primary next-step">
-                                        Selanjutnya
-                                        <i class="fas fa-arrow-right ms-2"></i>
-                                    </button>
+                                <!-- Foto Tambahan -->
+                                <div class="form-group">
+                                    <label class="glass-label">
+                                        <i class="fas fa-images me-2"></i>Foto Tambahan
+                                    </label>
+                                    <div class="glass-file-upload" id="additionalPhotosUpload">
+                                        <input type="file"
+                                               class="file-input @error('foto.*') is-invalid @enderror"
+                                               id="fotoTambahan"
+                                               name="foto[]"
+                                               accept="image/*"
+                                               multiple>
+                                        <div class="upload-area">
+                                            <div class="upload-icon">
+                                                <i class="fas fa-plus"></i>
+                                            </div>
+                                            <div class="upload-text">
+                                                <p class="upload-title">Tambahkan foto lainnya</p>
+                                                <p class="upload-subtitle">Pilih beberapa foto sekaligus (Maks. 5 foto)</p>
+                                            </div>
+                                        </div>
+                                        <div class="photos-preview" id="additionalPhotosPreview">
+                                            <!-- Preview foto tambahan akan ditampilkan di sini -->
+                                        </div>
+                                    </div>
+                                    @error('foto.*')
+                                        <div class="glass-error">
+                                            <i class="fas fa-exclamation-circle me-2"></i>{{ $message }}
+                                        </div>
+                                    @enderror
+                                    <div class="input-help">
+                                        <i class="fas fa-lightbulb me-1"></i>
+                                        Tambahkan beberapa foto dari sudut berbeda untuk memberikan gambaran lebih lengkap
+                                    </div>
                                 </div>
-                            </div>
 
                             <!-- Step 3: Review -->
                             <div class="form-step" id="step3">
@@ -278,12 +370,12 @@
                                     <h4 class="step-title">
                                         <i class="fas fa-check-circle me-2"></i>Review & Submit
                                     </h4>
-                                    <p class="step-subtitle">Periksa kembali informasi kos sebelum menyimpan</p>
+                                    <p class="step-subtitle">Periksa kembali informasi kontrakan sebelum menyimpan</p>
                                 </div>
 
                                 <div class="review-card">
                                     <div class="review-header">
-                                        <h5>Preview Listing Kos Anda</h5>
+                                        <h5>Preview Listing Kontrakan Anda</h5>
                                     </div>
                                     <div class="review-content">
                                         <div class="review-image">
@@ -296,7 +388,7 @@
                                         </div>
                                         <div class="review-details">
                                             <div class="review-item">
-                                                <label>Nama Kos:</label>
+                                                <label>Nama Kontrakan:</label>
                                                 <span id="reviewNama">-</span>
                                             </div>
                                             <div class="review-item">
@@ -326,7 +418,7 @@
                                     <div class="notice-content">
                                         <h6>Catatan Penting:</h6>
                                         <ul>
-                                            <li>Listing kos Anda akan direview oleh tim admin sebelum ditampilkan</li>
+                                            <li>Listing kontrakan Anda akan direview oleh tim admin sebelum ditampilkan</li>
                                             <li>Proses verifikasi biasanya memakan waktu 1-2 hari kerja</li>
                                             <li>Pastikan semua informasi yang dimasukkan sudah benar</li>
                                             <li>Anda akan mendapat notifikasi via email saat listing disetujui</li>
@@ -340,7 +432,7 @@
                                     </button>
                                     <button type="submit" class="glass-btn glass-btn-primary submit-btn">
                                         <i class="fas fa-save me-2"></i>
-                                        <span class="btn-text">Simpan Kos</span>
+                                        <span class="btn-text">Simpan Kontrakan</span>
                                         <span class="btn-loading" style="display: none;">
                                             <i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...
                                         </span>
