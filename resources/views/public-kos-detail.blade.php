@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $kos->nama_kos . ' - Rent House')
+@section('title', $kos->nama_kos . ' - Kos Finder')
 
 @section('content')
 <div class="container-fluid glassmorphism-detail">
@@ -28,16 +28,16 @@
                 <div class="glass-card main-card">
                     <!-- Kos Image -->
                     <div class="kos-image-hero">
-                        @if($kos->foto)
-                            <img src="{{ asset($kos->foto) }}"
-                                 class="hero-image"
+                        @if($kos->mainPhoto)
+                            <img src="{{ asset($kos->mainPhoto->foto_path) }}" 
+                                 class="hero-image" 
                                  alt="{{ $kos->nama_kos }}">
                         @else
                             <div class="hero-image-placeholder">
                                 <i class="fas fa-home"></i>
                             </div>
                         @endif
-
+                        
                         <div class="hero-overlay">
                             <div class="hero-badges">
                                 <span class="verified-badge">
@@ -57,7 +57,7 @@
                         <div class="photo-gallery-grid">
                             @foreach($kos->photos->where('is_main', 0)->take(4) as $photo)
                                 <div class="gallery-item">
-                                    <img src="{{ asset($photo->foto_path) }}"
+                                    <img src="{{ asset($photo->foto_path) }}" 
                                          alt="Foto {{ $kos->nama_kos }}"
                                          class="gallery-image">
                                 </div>
@@ -70,7 +70,7 @@
                         @endif
                     </div>
                     @endif
-
+                    
                     <!-- Kos Content -->
                     <div class="kos-main-content">
                         <div class="kos-header mb-4">
@@ -86,7 +86,7 @@
                                 </span>
                             </div>
                         </div>
-
+                        
                         <!-- Location Section -->
                         <div class="detail-section">
                             <div class="section-header">
@@ -99,7 +99,7 @@
                                 <p class="location-text">{{ $kos->lokasi }}</p>
                             </div>
                         </div>
-
+                        
                         <!-- Facilities Section -->
                         @if($kos->fasilitas)
                             <div class="detail-section">
@@ -124,7 +124,7 @@
                                 </div>
                             </div>
                         @endif
-
+                        
                         <!-- Description Section -->
                         @if($kos->deskripsi)
                             <div class="detail-section">
@@ -142,7 +142,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Owner Info & Contact -->
             <div class="col-lg-4">
                 <!-- Owner Card -->
@@ -153,7 +153,7 @@
                         </div>
                         <h5 class="card-title">Pemilik Kos</h5>
                     </div>
-
+                    
                     <div class="owner-profile">
                         <div class="owner-avatar">
                             <i class="fas fa-user-circle"></i>
@@ -163,7 +163,7 @@
                             <span class="owner-badge">Pemilik Terverifikasi</span>
                         </div>
                     </div>
-
+                    
                     @guest
                         <div class="guest-notice">
                             <div class="notice-icon">
@@ -174,7 +174,7 @@
                                 <p>Daftar atau masuk untuk mendapatkan informasi kontak langsung dan terhubung dengan pemilik kos.</p>
                             </div>
                         </div>
-
+                        
                         <div class="guest-actions">
                             <a href="{{ route('register') }}" class="glass-btn glass-btn-primary w-100 mb-3">
                                 <i class="fas fa-user-plus me-2"></i>Daftar untuk Menghubungi
@@ -196,14 +196,14 @@
                                 </div>
                             @endif
                         </div>
-
+                        
                         @if(auth()->user()->role == 'penyewa')
                             @php
                                 $existingContact = \App\Models\Transaksi::where('kos_id', $kos->id)
                                                                       ->where('penyewa_id', auth()->id())
                                                                       ->first();
                             @endphp
-
+                            
                             @if($existingContact)
                                 <div class="contact-status">
                                     <div class="status-icon">
@@ -213,7 +213,7 @@
                                         <strong>Sudah Menghubungi</strong>
                                         <p>Anda menghubungi pemilik pada {{ $existingContact->created_at->format('d M Y') }}</p>
                                         <div class="status-badge-wrapper">
-                                            Status:
+                                            Status: 
                                             <span class="status-badge status-{{ $existingContact->status_transaksi }}">
                                                 {{ ucfirst($existingContact->status_transaksi) }}
                                             </span>
@@ -227,13 +227,13 @@
                                         <label for="catatan" class="glass-label">
                                             <i class="fas fa-comment-dots me-2"></i>Pesan (Opsional)
                                         </label>
-                                        <textarea class="glass-textarea"
-                                                  id="catatan"
-                                                  name="catatan"
-                                                  rows="3"
+                                        <textarea class="glass-textarea" 
+                                                  id="catatan" 
+                                                  name="catatan" 
+                                                  rows="3" 
                                                   placeholder="Halo, saya tertarik dengan kos Anda..."></textarea>
                                     </div>
-
+                                    
                                     <button type="submit" class="glass-btn glass-btn-primary contact-btn w-100">
                                         <i class="fas fa-paper-plane me-2"></i>Hubungi Pemilik
                                     </button>
@@ -256,7 +256,7 @@
                         @endif
                     @endguest
                 </div>
-
+                
                 <!-- Quick Actions -->
                 <div class="glass-card quick-actions-card">
                     <h6 class="card-title">
@@ -274,7 +274,24 @@
             </div>
         </div>
 
-        <!-- Similar Kos -->
+        <!-- Map Section -->
+    @if($kos->latitude && $kos->longitude)
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="glass-card">
+                <div class="card-body">
+                    <h5 class="section-title mb-3">
+                        <i class="fas fa-map-marker-alt section-icon location"></i>
+                        Lokasi pada Peta
+                    </h5>
+                    <div id="map" style="height: 400px;" class="rounded"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <!-- Similar Kos -->
         @php
             $similarKos = \App\Models\Kos::verified()->available()
                                         ->where('id', '!=', $kos->id)
@@ -282,7 +299,7 @@
                                         ->take(3)
                                         ->get();
         @endphp
-
+        
         @if($similarKos->count() > 0)
             <div class="row mt-5">
                 <div class="col-12">
@@ -294,22 +311,22 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="row g-4">
                 @foreach($similarKos as $similar)
                     <div class="col-lg-4">
                         <div class="glass-card similar-card h-100">
                             <div class="similar-image-container">
-                                @if($similar->foto)
-                                    <img src="{{ asset($similar->foto) }}"
-                                         class="similar-image"
+                                @if($similar->mainPhoto)
+                                    <img src="{{ asset($similar->mainPhoto->foto_path) }}" 
+                                         class="similar-image" 
                                          alt="{{ $similar->nama_kos }}">
                                 @else
                                     <div class="similar-image-placeholder">
                                         <i class="fas fa-home"></i>
                                     </div>
                                 @endif
-
+                                
                                 <div class="similar-overlay">
                                     <div class="similar-price">
                                         <span class="price-amount">Rp {{ number_format($similar->harga, 0, ',', '.') }}</span>
@@ -317,7 +334,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="similar-content">
                                 <h6 class="similar-title">{{ $similar->nama_kos }}</h6>
                                 <div class="similar-location">
@@ -325,7 +342,7 @@
                                     <span>{{ Str::limit($similar->lokasi, 30) }}</span>
                                 </div>
                             </div>
-
+                            
                             <div class="similar-footer">
                                 <a href="{{ route('public.kos.show', $similar->id) }}" class="glass-btn glass-btn-primary w-100">
                                     <i class="fas fa-eye me-2"></i>Lihat Detail
@@ -340,7 +357,22 @@
 </div>
 
 @push('styles')
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 <style>
+    /* Map Styles */
+    .map-section {
+        margin-top: 2rem;
+    }
+    .map-container {
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+    }
+    .map-container #map {
+        width: 100%;
+        height: 400px;
+    }
     :root {
         --primary-color: #3b82f6;
         --primary-light: #60a5fa;
@@ -356,7 +388,7 @@
         --dark-color: #1f2937;
         --light-color: #f8fafc;
         --white: #ffffff;
-
+        
         /* Glass morphism variables */
         --glass-bg: rgba(255, 255, 255, 0.08);
         --glass-bg-light: rgba(255, 255, 255, 0.12);
@@ -364,7 +396,7 @@
         --glass-border: rgba(255, 255, 255, 0.18);
         --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
         --glass-shadow-hover: 0 20px 60px rgba(31, 38, 135, 0.5);
-
+        
         /* Gradients */
         --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         --gradient-secondary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -388,7 +420,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background:
+        background: 
             radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
             radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
             radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
@@ -1098,6 +1130,50 @@
         padding: 0 1.5rem 1.5rem;
     }
 
+        /* Photo Gallery */
+    .photo-gallery {
+        padding: 1.5rem;
+        background: var(--glass-bg-dark);
+    }
+
+    .photo-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+
+    .gallery-item {
+        position: relative;
+        padding-bottom: 75%; /* 4:3 aspect ratio */
+        overflow: hidden;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.05);
+    }
+
+    .gallery-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .more-photos {
+        margin-top: 1rem;
+        text-align: center;
+        color: var(--white);
+        font-weight: 600;
+        padding: 0.5rem;
+        background: var(--glass-bg);
+        border-radius: 8px;
+    }
+
     /* Form Group */
     .form-group {
         margin-bottom: 1.5rem;
@@ -1224,5 +1300,33 @@
         outline-offset: 2px;
     }
 </style>
+@endpush
+@push('scripts')
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if($kos->latitude && $kos->longitude)
+                // Initialize map
+                const map = L.map('map').setView([{{ $kos->latitude }}, {{ $kos->longitude }}], 15);
+
+                // Add tile layer (OpenStreetMap)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                // Add marker for kos location
+                const marker = L.marker([{{ $kos->latitude }}, {{ $kos->longitude }}])
+                    .addTo(map)
+                    .bindPopup("<strong>{{ $kos->nama_kos }}</strong><br>{{ $kos->lokasi }}")
+                    .openPopup();
+
+                // Make map responsive
+                window.addEventListener('resize', function() {
+                    map.invalidateSize();
+                });
+            @endif
+        });
+    </script>
 @endpush
 @endsection

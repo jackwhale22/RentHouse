@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Jelajahi Kontrakan - Rent House')
+@section('title', 'Jelajahi Kos - Kos Finder')
 
 @section('content')
     <div class="container-fluid glassmorphism-browse">
@@ -9,9 +9,9 @@
             <div class="row mb-5">
                 <div class="col-12 text-center">
                     <h1 class="page-title mb-3">
-                        <span class="gradient-text">Jelajahi</span> Kontrakan Tersedia
+                        <span class="gradient-text">Jelajahi</span> Kos Tersedia
                     </h1>
-                    <p class="page-subtitle">Temukan kontrakan impian Anda dengan filter pencarian yang canggih</p>
+                    <p class="page-subtitle">Temukan kos impian Anda dengan filter pencarian yang canggih</p>
                 </div>
             </div>
 
@@ -33,11 +33,11 @@
                                         <label for="search" class="glass-label">
                                             <i class="fas fa-search me-2"></i>Pencarian
                                         </label>
-                                        <input type="text"
-                                               class="glass-input"
-                                               id="search"
-                                               name="search"
-                                               value="{{ request('search') }}"
+                                        <input type="text" 
+                                               class="glass-input" 
+                                               id="search" 
+                                               name="search" 
+                                               value="{{ request('search') }}" 
                                                placeholder="Nama kos atau lokasi...">
                                     </div>
                                 </div>
@@ -47,11 +47,11 @@
                                         <label for="lokasi" class="glass-label">
                                             <i class="fas fa-map-marker-alt me-2"></i>Lokasi
                                         </label>
-                                        <input type="text"
-                                               class="glass-input"
-                                               id="lokasi"
-                                               name="lokasi"
-                                               value="{{ request('lokasi') }}"
+                                        <input type="text" 
+                                               class="glass-input" 
+                                               id="lokasi" 
+                                               name="lokasi" 
+                                               value="{{ request('lokasi') }}" 
                                                placeholder="Lokasi spesifik...">
                                     </div>
                                 </div>
@@ -61,11 +61,11 @@
                                         <label for="min_price" class="glass-label">
                                             <i class="fas fa-money-bill-wave me-2"></i>Harga Min
                                         </label>
-                                        <input type="number"
-                                               class="glass-input"
-                                               id="min_price"
-                                               name="min_price"
-                                               value="{{ request('min_price') }}"
+                                        <input type="number" 
+                                               class="glass-input" 
+                                               id="min_price" 
+                                               name="min_price" 
+                                               value="{{ request('min_price') }}" 
                                                placeholder="0"
                                                step="100000">
                                     </div>
@@ -76,11 +76,11 @@
                                         <label for="max_price" class="glass-label">
                                             <i class="fas fa-money-bill-wave me-2"></i>Harga Max
                                         </label>
-                                        <input type="number"
-                                               class="glass-input"
-                                               id="max_price"
-                                               name="max_price"
-                                               value="{{ request('max_price') }}"
+                                        <input type="number" 
+                                               class="glass-input" 
+                                               id="max_price" 
+                                               name="max_price" 
+                                               value="{{ request('max_price') }}" 
                                                placeholder="10.000.000"
                                                step="100000">
                                     </div>
@@ -121,7 +121,7 @@
                                         <i class="fas fa-search-plus me-2"></i>Hasil Pencarian
                                         <span class="badge glass-badge ms-2">{{ $kosList->total() }} ditemukan</span>
                                     @else
-                                        <i class="fas fa-home me-2"></i>Semua Kontrakan Tersedia
+                                        <i class="fas fa-home me-2"></i>Semua Kos Tersedia
                                         <span class="badge glass-badge ms-2">{{ $kosList->total() }} kos</span>
                                     @endif
                                 </h5>
@@ -147,9 +147,9 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="glass-card kos-card h-100">
                                 <div class="kos-image-container">
-                                    @if($kos->foto)
-                                        <img src="{{ asset($kos->foto) }}"
-                                             class="kos-image"
+                                    @if($kos->mainPhoto)
+                                        <img src="{{ asset($kos->mainPhoto->foto_path) }}" 
+                                             class="kos-image" 
                                              alt="{{ $kos->nama_kos }}">
                                     @else
                                         <div class="kos-image-placeholder">
@@ -224,17 +224,17 @@
                             <div class="no-results-icon">
                                 <i class="fas fa-search"></i>
                             </div>
-                            <h4 class="no-results-title">Tidak Ada Kontrakan Ditemukan</h4>
+                            <h4 class="no-results-title">Tidak Ada Kos Ditemukan</h4>
                             @if(request()->hasAny(['search', 'lokasi', 'min_price', 'max_price']))
                                 <p class="no-results-text mb-4">
-                                    Coba sesuaikan kriteria pencarian Anda atau hapus filter untuk melihat semua kontrakan yang tersedia.
+                                    Coba sesuaikan kriteria pencarian Anda atau hapus filter untuk melihat semua kos yang tersedia.
                                 </p>
                                 <a href="{{ route('public.search') }}" class="glass-btn glass-btn-primary">
                                     <i class="fas fa-times me-2"></i>Hapus Filter
                                 </a>
                             @else
                                 <p class="no-results-text mb-4">
-                                    Tidak ada kontrakan terverifikasi yang tersedia saat ini. Silakan cek kembali nanti.
+                                    Tidak ada kos terverifikasi yang tersedia saat ini. Silakan cek kembali nanti.
                                 </p>
                                 <a href="{{ route('home') }}" class="glass-btn glass-btn-primary">
                                     <i class="fas fa-home me-2"></i>Kembali ke Beranda
@@ -253,8 +253,8 @@
                             <div class="cta-icon">
                                 <i class="fas fa-user-plus"></i>
                             </div>
-                            <h5 class="cta-title">Ingin Menghubungi Pemilik Kontrakan?</h5>
-                            <p class="cta-text">Daftar sekarang untuk mendapatkan informasi kontak langsung dan terhubung dengan pemilik kontrakan.</p>
+                            <h5 class="cta-title">Ingin Menghubungi Pemilik Kos?</h5>
+                            <p class="cta-text">Daftar sekarang untuk mendapatkan informasi kontak langsung dan terhubung dengan pemilik kos.</p>
                             <div class="cta-actions">
                                 <a href="{{ route('register') }}" class="glass-btn glass-btn-primary me-3">
                                     <i class="fas fa-user-plus me-2"></i>Daftar Sekarang
@@ -319,7 +319,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background:
+                background: 
                     radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
                     radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
                     radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);

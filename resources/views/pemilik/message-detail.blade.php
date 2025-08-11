@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Detail Pesan - Rent House')
+@section('title', 'Detail Pesan - Kos Finder')
 
 @section('content')
     <div class="container-fluid glassmorphism-detail-pesan">

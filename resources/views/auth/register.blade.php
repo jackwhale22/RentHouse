@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar - Rent House')
+@section('title', 'Daftar - Kos Finder')
 
 @section('content')
 <div class="container-fluid glassmorphism-register">
@@ -14,26 +14,26 @@
                             <i class="fas fa-user-plus"></i>
                         </div>
                         <h2 class="register-title">Buat Akun</h2>
-                        <p class="register-subtitle">Bergabunglah dengan Rent House hari ini</p>
+                        <p class="register-subtitle">Bergabunglah dengan Kos Finder hari ini</p>
                     </div>
 
                     <!-- Registration Form -->
                     <form method="POST" action="{{ route('register') }}" class="register-form">
                         @csrf
-
+                        
                         <!-- Full Name -->
                         <div class="form-group">
                             <label for="name" class="glass-label">
                                 <i class="fas fa-user me-2"></i>Nama Lengkap
                             </label>
                             <div class="glass-input-wrapper">
-                                <input type="text"
-                                       class="glass-input @error('name') is-invalid @enderror"
-                                       id="name"
-                                       name="name"
-                                       value="{{ old('name') }}"
+                                <input type="text" 
+                                       class="glass-input @error('name') is-invalid @enderror" 
+                                       id="name" 
+                                       name="name" 
+                                       value="{{ old('name') }}" 
                                        placeholder="Masukkan nama lengkap Anda"
-                                       required
+                                       required 
                                        autofocus>
                                 <div class="input-icon">
                                     <i class="fas fa-user"></i>
@@ -52,11 +52,11 @@
                                 <i class="fas fa-envelope me-2"></i>Alamat Email
                             </label>
                             <div class="glass-input-wrapper">
-                                <input type="email"
-                                       class="glass-input @error('email') is-invalid @enderror"
-                                       id="email"
-                                       name="email"
-                                       value="{{ old('email') }}"
+                                <input type="email" 
+                                       class="glass-input @error('email') is-invalid @enderror" 
+                                       id="email" 
+                                       name="email" 
+                                       value="{{ old('email') }}" 
                                        placeholder="nama@email.com"
                                        required>
                                 <div class="input-icon">
@@ -76,10 +76,10 @@
                                 <i class="fas fa-phone me-2"></i>Nomor Telepon <span class="optional">(Opsional)</span>
                             </label>
                             <div class="glass-input-wrapper">
-                                <input type="text"
-                                       class="glass-input @error('phone') is-invalid @enderror"
-                                       id="phone"
-                                       name="phone"
+                                <input type="text" 
+                                       class="glass-input @error('phone') is-invalid @enderror" 
+                                       id="phone" 
+                                       name="phone" 
                                        value="{{ old('phone') }}"
                                        placeholder="08xxxxxxxxxx">
                                 <div class="input-icon">
@@ -99,16 +99,16 @@
                                 <i class="fas fa-users me-2"></i>Daftar sebagai
                             </label>
                             <div class="glass-select-wrapper">
-                                <select class="glass-select @error('role') is-invalid @enderror"
-                                        id="role"
-                                        name="role"
+                                <select class="glass-select @error('role') is-invalid @enderror" 
+                                        id="role" 
+                                        name="role" 
                                         required>
                                     <option value="">Pilih peran Anda</option>
                                     <option value="penyewa" {{ old('role') == 'penyewa' ? 'selected' : '' }}>
-                                        Penyewa (Mencari Kontrakan)
+                                        Penyewa (Mencari Kos)
                                     </option>
                                     <option value="pemilik" {{ old('role') == 'pemilik' ? 'selected' : '' }}>
-                                        Pemilik (Memiliki Kontrakan untuk Disewakan)
+                                        Pemilik (Memiliki Kos untuk Disewakan)
                                     </option>
                                 </select>
                                 <div class="select-icon">
@@ -128,10 +128,10 @@
                                 <i class="fas fa-lock me-2"></i>Kata Sandi
                             </label>
                             <div class="glass-input-wrapper">
-                                <input type="password"
-                                       class="glass-input @error('password') is-invalid @enderror"
-                                       id="password"
-                                       name="password"
+                                <input type="password" 
+                                       class="glass-input @error('password') is-invalid @enderror" 
+                                       id="password" 
+                                       name="password" 
                                        placeholder="Minimal 8 karakter"
                                        required>
                                 <div class="input-icon">
@@ -154,10 +154,10 @@
                                 <i class="fas fa-lock me-2"></i>Konfirmasi Kata Sandi
                             </label>
                             <div class="glass-input-wrapper">
-                                <input type="password"
-                                       class="glass-input"
-                                       id="password_confirmation"
-                                       name="password_confirmation"
+                                <input type="password" 
+                                       class="glass-input" 
+                                       id="password_confirmation" 
+                                       name="password_confirmation" 
                                        placeholder="Ulangi kata sandi"
                                        required>
                                 <div class="input-icon">
@@ -187,7 +187,7 @@
                             <span>atau</span>
                         </div>
                         <p class="login-link">
-                            Sudah punya akun?
+                            Sudah punya akun? 
                             <a href="{{ route('login') }}" class="glass-link">
                                 Masuk di sini
                             </a>
@@ -204,7 +204,7 @@
                             </div>
                             <h6 class="info-title">Sebagai Penyewa</h6>
                             <ul class="info-list">
-                                <li><i class="fas fa-check me-2"></i>Cari kontrakan sesuai budget</li>
+                                <li><i class="fas fa-check me-2"></i>Cari kos sesuai budget</li>
                                 <li><i class="fas fa-check me-2"></i>Hubungi pemilik langsung</li>
                                 <li><i class="fas fa-check me-2"></i>Akses informasi lengkap</li>
                             </ul>
@@ -217,8 +217,8 @@
                             </div>
                             <h6 class="info-title">Sebagai Pemilik</h6>
                             <ul class="info-list">
-                                <li><i class="fas fa-check me-2"></i>Iklankan kontrakan gratis</li>
-                                <li><i class="fas fa-check me-2"></i>Kelola data kontrakan</li>
+                                <li><i class="fas fa-check me-2"></i>Iklankan kos gratis</li>
+                                <li><i class="fas fa-check me-2"></i>Kelola data kos</li>
                                 <li><i class="fas fa-check me-2"></i>Terima pesan calon penyewa</li>
                             </ul>
                         </div>
@@ -246,7 +246,7 @@
         --dark-color: #1f2937;
         --light-color: #f8fafc;
         --white: #ffffff;
-
+        
         /* Glass morphism variables */
         --glass-bg: rgba(255, 255, 255, 0.08);
         --glass-bg-light: rgba(255, 255, 255, 0.12);
@@ -254,7 +254,7 @@
         --glass-border: rgba(255, 255, 255, 0.18);
         --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
         --glass-shadow-hover: 0 20px 60px rgba(31, 38, 135, 0.5);
-
+        
         /* Gradients */
         --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         --gradient-secondary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -278,7 +278,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background:
+        background: 
             radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
             radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
             radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
@@ -805,7 +805,7 @@
     function togglePassword(inputId) {
         const input = document.getElementById(inputId);
         const eye = document.getElementById(inputId + '-eye');
-
+        
         if (input.type === 'password') {
             input.type = 'text';
             eye.classList.remove('fa-eye');
@@ -822,7 +822,7 @@
         const submitBtn = this.querySelector('.register-btn');
         const btnText = submitBtn.querySelector('.btn-text');
         const btnLoading = submitBtn.querySelector('.btn-loading');
-
+        
         btnText.style.display = 'none';
         btnLoading.style.display = 'inline-flex';
         submitBtn.disabled = true;

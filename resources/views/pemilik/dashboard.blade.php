@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard Pemilik - Rent House')
+@section('title', 'Dashboard Pemilik - Kos Finder')
 
 @section('content')
     <div class="container-fluid glassmorphism-dashboard">
@@ -16,12 +16,12 @@
                                 </div>
                                 <div class="header-text">
                                     <h1 class="dashboard-title">Dashboard Pemilik</h1>
-                                    <p class="dashboard-subtitle">Kelola kontrakan dan pantau aktivitas Anda</p>
+                                    <p class="dashboard-subtitle">Kelola kos dan pantau aktivitas Anda</p>
                                 </div>
                             </div>
                             <div class="header-actions">
                                 <a href="{{ route('pemilik.kos.create') }}" class="glass-btn glass-btn-primary">
-                                    <i class="fas fa-plus me-2"></i>Tambah Kontrakan Baru
+                                    <i class="fas fa-plus me-2"></i>Tambah Kos Baru
                                 </a>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <h2 class="stat-number">{{ $totalKos }}</h2>
-                            <p class="stat-description">Semua listing kontrakan Anda</p>
+                            <p class="stat-description">Semua listing kos Anda</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                                     <h5 class="table-title">
                                         <i class="fas fa-building me-2"></i>Kos Terbaru
                                     </h5>
-                                    <p class="table-subtitle">Kelola dan pantau listing kontrakan Anda</p>
+                                    <p class="table-subtitle">Kelola dan pantau listing kos Anda</p>
                                 </div>
                                 <div class="header-actions">
                                     <a href="{{ route('pemilik.my-kos') }}" class="glass-btn glass-btn-outline">
@@ -136,7 +136,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>
-                                                        <i class="fas fa-home me-2"></i>Nama Kontrakan
+                                                        <i class="fas fa-home me-2"></i>Nama Kos
                                                     </th>
                                                     <th>
                                                         <i class="fas fa-map-marker-alt me-2"></i>Lokasi
@@ -218,13 +218,13 @@
                                     <div class="empty-icon">
                                         <i class="fas fa-home"></i>
                                     </div>
-                                    <h5 class="empty-title">Belum Ada Kontrakan yang Ditambahkan</h5>
+                                    <h5 class="empty-title">Belum Ada Kos yang Ditambahkan</h5>
                                     <p class="empty-description">
-                                        Mulai dengan menambahkan listing kontrakan pertama Anda dan jangkau ribuan calon penyewa
+                                        Mulai dengan menambahkan listing kos pertama Anda dan jangkau ribuan calon penyewa
                                     </p>
                                     <div class="empty-actions">
                                         <a href="{{ route('pemilik.kos.create') }}" class="glass-btn glass-btn-primary">
-                                            <i class="fas fa-plus me-2"></i>Tambah Kontrakan Pertama
+                                            <i class="fas fa-plus me-2"></i>Tambah Kos Pertama
                                         </a>
                                     </div>
                                 </div>
@@ -241,8 +241,8 @@
                         <div class="quick-icon primary">
                             <i class="fas fa-plus-circle"></i>
                         </div>
-                        <h6 class="quick-title">Tambah Kontrakan Baru</h6>
-                        <p class="quick-description">Buat listing kontrakan baru dan mulai menerima inquiries</p>
+                        <h6 class="quick-title">Tambah Kos Baru</h6>
+                        <p class="quick-description">Buat listing kos baru dan mulai menerima inquiries</p>
                         <a href="{{ route('pemilik.kos.create') }}" class="glass-btn glass-btn-outline w-100">
                             <i class="fas fa-arrow-right me-2"></i>Mulai Sekarang
                         </a>
@@ -266,7 +266,7 @@
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <h6 class="quick-title">Analitik</h6>
-                        <p class="quick-description">Pantau performa dan statistik kontrakan Anda</p>
+                        <p class="quick-description">Pantau performa dan statistik kos Anda</p>
                         <a href="{{ route('pemilik.my-kos') }}" class="glass-btn glass-btn-outline w-100">
                             <i class="fas fa-arrow-right me-2"></i>Lihat Detail
                         </a>
@@ -288,7 +288,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="modal-text">Apakah Anda yakin ingin menghapus kontrakan <strong id="kosName"></strong>?</p>
+                    <p class="modal-text">Apakah Anda yakin ingin menghapus kos <strong id="kosName"></strong>?</p>
                     <p class="modal-warning">
                         <i class="fas fa-info-circle me-2"></i>
                         Tindakan ini tidak dapat dibatalkan dan akan menghapus semua data terkait.
