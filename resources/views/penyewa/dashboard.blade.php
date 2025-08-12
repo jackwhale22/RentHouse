@@ -179,8 +179,8 @@
                                             <div class="glass-kos-card">
                                                 <!-- Kos Image -->
                                                 <div class="kos-image-container">
-                                                    @if($kos->foto)
-                                                        <img src="{{ asset($kos->foto) }}" alt="{{ $kos->nama_kos }}" class="kos-image">
+                                                    @if($kos->mainPhoto)
+                                                        <img src="{{ asset($kos->mainPhoto->foto_path) }}" alt="{{ $kos->nama_kos }}" class="kos-image">
                                                         <div class="image-overlay">
                                                             <div class="overlay-content">
                                                                 <i class="fas fa-eye overlay-icon"></i>

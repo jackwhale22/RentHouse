@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Masuk - Rent House')
+@section('title', 'Masuk - Kos Finder')
 
 @section('content')
 <div class="container-fluid glassmorphism-login">
@@ -20,21 +20,20 @@
                     <!-- Login Form -->
                     <form method="POST" action="{{ route('login') }}" class="login-form">
                         @csrf
-
+                        
                         <!-- Email Address -->
                         <div class="form-group">
                             <label for="email" class="glass-label">
                                 <i class="fas fa-envelope me-2"></i>Alamat Email
                             </label>
                             <div class="glass-input-wrapper">
-                                <input type="email"
-                                       class="glass-input @error('email') is-invalid @enderror"
-                                       id="email"
-                                       name="email"
-                                       value="{{ old('email') }}"
+                                <input type="email" 
+                                       class="glass-input @error('email') is-invalid @enderror" 
+                                       id="email" 
+                                       name="email" 
+                                       value="{{ old('email') }}" 
                                        placeholder="nama@email.com"
-                                       required
-                                       autocomplete="email"
+                                       required 
                                        autofocus>
                                 <div class="input-icon">
                                     <i class="fas fa-envelope"></i>
@@ -53,10 +52,10 @@
                                 <i class="fas fa-lock me-2"></i>Kata Sandi
                             </label>
                             <div class="glass-input-wrapper">
-                                <input type="password"
-                                       class="glass-input @error('password') is-invalid @enderror"
-                                       id="password"
-                                       name="password"
+                                <input type="password" 
+                                       class="glass-input @error('password') is-invalid @enderror" 
+                                       id="password" 
+                                       name="password" 
                                        placeholder="Masukkan kata sandi"
                                        required>
                                 <div class="input-icon">
@@ -104,7 +103,7 @@
                             <span>atau</span>
                         </div>
                         <p class="register-link">
-                            Belum punya akun?
+                            Belum punya akun? 
                             <a href="{{ route('register') }}" class="glass-link">
                                 Daftar di sini
                             </a>
@@ -119,8 +118,8 @@
                             <div class="quick-icon">
                                 <i class="fas fa-search"></i>
                             </div>
-                            <h6 class="quick-title">Cari Kontrakan</h6>
-                            <p class="quick-text">Temukan kontrakan impian Anda</p>
+                            <h6 class="quick-title">Cari Kos</h6>
+                            <p class="quick-text">Temukan kos impian Anda</p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -129,7 +128,7 @@
                                 <i class="fas fa-plus-circle"></i>
                             </div>
                             <h6 class="quick-title">Iklankan</h6>
-                            <p class="quick-text">Pasang iklan kontrakan gratis</p>
+                            <p class="quick-text">Pasang iklan kos gratis</p>
                         </div>
                     </div>
                 </div>
@@ -137,12 +136,12 @@
                 <!-- Features Preview -->
                 <div class="glass-card features-preview mt-4">
                     <h6 class="features-title">
-                        <i class="fas fa-star me-2"></i>Mengapa Rent House?
+                        <i class="fas fa-star me-2"></i>Mengapa Kos Finder?
                     </h6>
                     <div class="features-list">
                         <div class="feature-item">
                             <i class="fas fa-shield-check feature-icon"></i>
-                            <span>Kontrakan terverifikasi</span>
+                            <span>Kos terverifikasi</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-comments feature-icon"></i>
@@ -176,7 +175,7 @@
         --dark-color: #1f2937;
         --light-color: #f8fafc;
         --white: #ffffff;
-
+        
         /* Glass morphism variables */
         --glass-bg: rgba(255, 255, 255, 0.08);
         --glass-bg-light: rgba(255, 255, 255, 0.12);
@@ -184,7 +183,7 @@
         --glass-border: rgba(255, 255, 255, 0.18);
         --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
         --glass-shadow-hover: 0 20px 60px rgba(31, 38, 135, 0.5);
-
+        
         /* Gradients */
         --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         --gradient-secondary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -208,7 +207,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background:
+        background: 
             radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
             radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
             radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
@@ -797,7 +796,7 @@
     function togglePassword(inputId) {
         const input = document.getElementById(inputId);
         const eye = document.getElementById(inputId + '-eye');
-
+        
         if (input.type === 'password') {
             input.type = 'text';
             eye.classList.remove('fa-eye');
@@ -814,7 +813,7 @@
         const submitBtn = this.querySelector('.login-btn');
         const btnText = submitBtn.querySelector('.btn-text');
         const btnLoading = submitBtn.querySelector('.btn-loading');
-
+        
         btnText.style.display = 'none';
         btnLoading.style.display = 'inline-flex';
         submitBtn.disabled = true;
@@ -890,7 +889,7 @@
             const form = e.target.closest('form');
             const inputs = form.querySelectorAll('.glass-input');
             const currentIndex = Array.from(inputs).indexOf(e.target);
-
+            
             if (currentIndex < inputs.length - 1) {
                 e.preventDefault();
                 inputs[currentIndex + 1].focus();

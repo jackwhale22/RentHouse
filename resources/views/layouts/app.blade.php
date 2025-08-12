@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Rent House')</title>
-
+    <title>@yield('title', 'Kos Finder')</title>
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+    
     <style>
         :root {
             --primary-color: #3b82f6;
@@ -31,7 +31,7 @@
             --dark-color: #1f2937;
             --light-color: #f8fafc;
             --white: #ffffff;
-
+            
             /* Glass morphism variables */
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-bg-light: rgba(255, 255, 255, 0.12);
@@ -39,7 +39,7 @@
             --glass-border: rgba(255, 255, 255, 0.18);
             --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
             --glass-shadow-hover: 0 20px 60px rgba(31, 38, 135, 0.5);
-
+            
             /* Gradients */
             --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-secondary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -47,7 +47,7 @@
             --gradient-success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             --gradient-info: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4facfe 100%);
-
+            
             /* Sidebar variables */
             --sidebar-width: 280px;
             --sidebar-collapsed-width: 80px;
@@ -74,7 +74,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background:
+            background: 
                 radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
@@ -715,7 +715,7 @@
             color: var(--white);
         }
     </style>
-
+    
     @stack('styles')
 </head>
 <body class="@auth sidebar-active @endauth">
@@ -725,13 +725,13 @@
         <nav class="navbar navbar-expand-lg glass-navbar">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <i class="fas fa-home"></i>Rent House
+                    <i class="fas fa-home"></i>Kos Finder
                 </a>
-
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -751,7 +751,7 @@
     @else
         <!-- Sidebar for authenticated users -->
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
+        
         <!-- Mobile toggle button -->
         <button class="mobile-toggle d-lg-none" id="mobileToggle">
             <i class="fas fa-bars"></i>
@@ -762,7 +762,7 @@
             <div class="sidebar-header">
                 <a href="{{ route('home') }}" class="sidebar-brand">
                     <i class="fas fa-home"></i>
-                    <span class="brand-text">Rent House</span>
+                    <span class="brand-text">Kos Finder</span>
                 </a>
                 <button class="sidebar-toggle d-none d-lg-block" id="sidebarToggle">
                     <i class="fas fa-chevron-left"></i>
@@ -787,7 +787,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.verify-kos') ? 'active' : '' }}" href="{{ route('admin.verify-kos') }}">
                             <i class="fas fa-check-circle"></i>
-                            <span class="nav-text">Verifikasi Kontrakan</span>
+                            <span class="nav-text">Verifikasi Kos</span>
                         </a>
                     </li>
                 @elseif(auth()->user()->isPemilik())
@@ -806,7 +806,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('pemilik.kos.create') ? 'active' : '' }}" href="{{ route('pemilik.kos.create') }}">
                             <i class="fas fa-plus-circle"></i>
-                            <span class="nav-text">Tambah Kontrakan</span>
+                            <span class="nav-text">Tambah Kos</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -825,7 +825,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('search') ? 'active' : '' }}" href="{{ route('search') }}">
                             <i class="fas fa-search"></i>
-                            <span class="nav-text">Cari Kontrakan</span>
+                            <span class="nav-text">Cari Kos</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -841,7 +841,7 @@
                         </a>
                     </li>
                 @endif
-
+                
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('profile') ? 'active' : '' }}" href="{{ route('profile') }}">
                         <i class="fas fa-user-edit"></i>
@@ -862,9 +862,9 @@
                             @if(auth()->user()->isAdmin())
                                 Administrator
                             @elseif(auth()->user()->isPemilik())
-                                Pemilik Kontrakan
+                                Pemilik Kos
                             @else
-                                Pencari Kontrakan
+                                Pencari Kos
                             @endif
                         </p>
                     </div>
@@ -905,7 +905,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const sidebar = document.getElementById('sidebar');
@@ -919,7 +919,7 @@
                 sidebarToggle.addEventListener('click', function() {
                     sidebar.classList.toggle('collapsed');
                     body.classList.toggle('collapsed');
-
+                    
                     // Change icon
                     const icon = this.querySelector('i');
                     if (sidebar.classList.contains('collapsed')) {
@@ -1023,7 +1023,7 @@
                 const size = Math.max(rect.width, rect.height);
                 const x = e.clientX - rect.left - size / 2;
                 const y = e.clientY - rect.top - size / 2;
-
+                
                 ripple.style.cssText = `
                     position: absolute;
                     border-radius: 50%;
@@ -1036,11 +1036,11 @@
                     top: ${y}px;
                     pointer-events: none;
                 `;
-
+                
                 this.style.position = 'relative';
                 this.style.overflow = 'hidden';
                 this.appendChild(ripple);
-
+                
                 setTimeout(() => {
                     ripple.remove();
                 }, 600);

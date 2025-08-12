@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Verifikasi Kontrakan - Dashboard Admin')
+@section('title', 'Verifikasi Kos - Dashboard Admin')
 
 @section('content')
     <div class="container-fluid glassmorphism-verification">
@@ -185,7 +185,7 @@
                                             data-kos-location="{{ $kos->lokasi }}" data-kos-price="{{ $kos->harga }}"
                                             data-kos-description="{{ $kos->deskripsi ?? '' }}"
                                             data-kos-facilities="{{ $kos->fasilitas ?? '' }}"
-                                            data-kos-photo="{{ $kos->foto ?? '' }}"
+                                            data-kos-photo="{{ $kos->mainPhoto ? asset($kos->mainPhoto->foto_path) : '' }}"
                                             data-kos-verified="{{ $kos->is_verified ? 'true' : 'false' }}"
                                             data-kos-created="{{ $kos->created_at->format('Y-m-d H:i:s') }}"
                                             data-owner-name="{{ $kos->pemilik->name }}"
@@ -195,16 +195,14 @@
                                             <div class="glass-kos-card">
                                                 <!-- Kos Image -->
                                                 <div class="kos-image-container">
-                                                    @if($kos->foto)
-                                                        <img src="{{ asset($kos->foto) }}" alt="{{ $kos->nama_kos }}" class="kos-image">
-                                                    @else
-                                                        <div class="kos-image-placeholder">
-                                                            <i class="fas fa-home placeholder-icon"></i>
-                                                            <p class="placeholder-text">Tidak Ada Gambar</p>
-                                                        </div>
-                                                    @endif
-
-                                                    <!-- Status Badge -->
+                                    @if($kos->mainPhoto)
+                                        <img src="{{ asset($kos->mainPhoto->foto_path) }}" alt="{{ $kos->nama_kos }}" class="kos-image">
+                                    @else
+                                        <div class="kos-image-placeholder">
+                                            <i class="fas fa-home placeholder-icon"></i>
+                                            <p class="placeholder-text">Tidak Ada Gambar</p>
+                                        </div>
+                                    @endif                                                    <!-- Status Badge -->
                                                     <div class="status-badge-container">
                                                         @if($kos->is_verified)
                                                             <div class="enhanced-badge enhanced-badge-sm status-verified">
@@ -359,7 +357,7 @@
                                                         data-kos-location="{{ $kos->lokasi }}" data-kos-price="{{ $kos->harga }}"
                                                         data-kos-description="{{ $kos->deskripsi ?? '' }}"
                                                         data-kos-facilities="{{ $kos->fasilitas ?? '' }}"
-                                                        data-kos-photo="{{ $kos->foto ?? '' }}"
+                                                        data-kos-photo="{{ $kos->mainPhoto ? asset($kos->mainPhoto->foto_path) : '' }}"
                                                         data-kos-verified="{{ $kos->is_verified ? 'true' : 'false' }}"
                                                         data-kos-created="{{ $kos->created_at->format('Y-m-d H:i:s') }}"
                                                         data-owner-name="{{ $kos->pemilik->name }}"

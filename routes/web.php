@@ -23,6 +23,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/browse', [HomeController::class, 'publicSearch'])->name('public.search');
 Route::get('/kos-detail/{id}', [HomeController::class, 'showKos'])->name('public.kos.show');
 
+// Route untuk mengakses file uploads
+Route::get('uploads/{path}', function($path) {
+    return response()->file(public_path("uploads/{$path}"));
+})->where('path', '.*');
+
 // Authentication routes
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -62,7 +67,7 @@ Route::middleware(['auth', 'role:pemilik'])->prefix('pemilik')->name('pemilik.')
     Route::post('/kos', [PemilikController::class, 'storeKos'])->name('kos.store');
     Route::get('/kos/{id}/edit', [PemilikController::class, 'editKos'])->name('kos.edit');
     Route::put('/kos/{id}', [PemilikController::class, 'updateKos'])->name('kos.update');
-    Route::delete('/kos/{id}/delete', [PemilikController::class, 'deleteKos'])->name('pemilik.kos.delete');
+    Route::delete('/kos/{id}', [PemilikController::class, 'deleteKos'])->name('pemilik.kos.delete');
 
     // Message management routes
     Route::get('/messages', [PemilikController::class, 'messages'])->name('messages');

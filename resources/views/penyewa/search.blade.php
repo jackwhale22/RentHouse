@@ -130,8 +130,8 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="glass-card kos-card h-100">
                                 <div class="kos-image-container">
-                                    @if($kos->foto)
-                                        <img src="{{ asset($kos->foto) }}" class="kos-image" alt="{{ $kos->nama_kos }}">
+                                    @if($kos->mainPhoto)
+                                        <img src="{{ asset($kos->mainPhoto->foto_path) }}" class="kos-image" alt="{{ $kos->nama_kos }}">
                                     @else
                                         <div class="kos-image-placeholder">
                                             <i class="fas fa-home"></i>

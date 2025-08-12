@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Kontrakan - Rent House')
+@section('title', 'Edit Kos - Kos Finder')
 
 @section('content')
     <div class="container-fluid glassmorphism-edit-kos">
@@ -15,13 +15,13 @@
                                     <i class="fas fa-edit"></i>
                                 </div>
                                 <div class="header-text">
-                                    <h1 class="page-title">Edit Kontrakan</h1>
-                                    <p class="page-subtitle">Update detail dan informasi kontrakan: {{ $kos->nama_kos }}</p>
+                                    <h1 class="page-title">Edit Kos</h1>
+                                    <p class="page-subtitle">Update detail dan informasi kos: {{ $kos->nama_kos }}</p>
                                 </div>
                             </div>
                             <div class="header-actions">
                                 <a href="{{ route('pemilik.my-kos') }}" class="glass-btn glass-btn-outline">
-                                    <i class="fas fa-arrow-left me-2"></i>Kembali ke Kontrakan Saya
+                                    <i class="fas fa-arrow-left me-2"></i>Kembali ke Kos Saya
                                 </a>
                             </div>
                         </div>
@@ -74,16 +74,16 @@
                     <div class="glass-card form-card">
                         <div class="form-header">
                             <h5 class="form-title">
-                                <i class="fas fa-home me-2"></i>Informasi Kontrakan
+                                <i class="fas fa-home me-2"></i>Informasi Kos
                             </h5>
-                            <p class="form-subtitle">Perbarui detail kontrakan Anda dengan informasi yang akurat dan menarik</p>
+                            <p class="form-subtitle">Perbarui detail kos Anda dengan informasi yang akurat dan menarik</p>
                         </div>
 
                         <div class="form-body">
                             <form action="{{ route('pemilik.kos.update', $kos->id) }}" method="POST" enctype="multipart/form-data" id="editKosForm">
                                 @csrf
                                 @method('PUT')
-
+                                
                                 <!-- Basic Information Section -->
                                 <div class="form-section">
                                     <div class="section-header">
@@ -96,14 +96,14 @@
                                         <div class="col-12">
                                             <div class="glass-form-group">
                                                 <label for="nama_kos" class="glass-label">
-                                                    <i class="fas fa-home me-2"></i>Nama Kontrakan
+                                                    <i class="fas fa-home me-2"></i>Nama Kos
                                                     <span class="required-asterisk">*</span>
                                                 </label>
                                                 <div class="glass-input-wrapper">
-                                                    <input type="text"
-                                                           class="glass-input @error('nama_kos') is-invalid @enderror"
-                                                           id="nama_kos"
-                                                           name="nama_kos"
+                                                    <input type="text" 
+                                                           class="glass-input @error('nama_kos') is-invalid @enderror" 
+                                                           id="nama_kos" 
+                                                           name="nama_kos" 
                                                            value="{{ old('nama_kos', $kos->nama_kos) }}"
                                                            placeholder="Masukkan nama kos yang menarik"
                                                            required>
@@ -124,10 +124,10 @@
                                                     <span class="required-asterisk">*</span>
                                                 </label>
                                                 <div class="glass-input-wrapper">
-                                                    <input type="text"
-                                                           class="glass-input @error('lokasi') is-invalid @enderror"
-                                                           id="lokasi"
-                                                           name="lokasi"
+                                                    <input type="text" 
+                                                           class="glass-input @error('lokasi') is-invalid @enderror" 
+                                                           id="lokasi" 
+                                                           name="lokasi" 
                                                            value="{{ old('lokasi', $kos->lokasi) }}"
                                                            placeholder="Jl. Sudirman No. 123, Jakarta Pusat"
                                                            required>
@@ -148,12 +148,12 @@
                                                     <i class="fas fa-map-pin me-2"></i>Latitude
                                                 </label>
                                                 <div class="glass-input-wrapper">
-                                                    <input type="number"
+                                                    <input type="number" 
                                                            step="any"
-                                                           class="glass-input @error('latitude') is-invalid @enderror"
-                                                           id="latitude"
-                                                           name="latitude"
-                                                           value="{{ old('latitude', $kos->latitude) }}"
+                                                           class="glass-input @error('latitude') is-invalid @enderror" 
+                                                           id="latitude" 
+                                                           name="latitude" 
+                                                           value="{{ old('latitude', $kos->latitude) }}" 
                                                            placeholder="-6.2088">
                                                     <div class="input-icon">
                                                         <i class="fas fa-map-marker"></i>
@@ -171,12 +171,12 @@
                                                     <i class="fas fa-map-pin me-2"></i>Longitude
                                                 </label>
                                                 <div class="glass-input-wrapper">
-                                                    <input type="number"
+                                                    <input type="number" 
                                                            step="any"
-                                                           class="glass-input @error('longitude') is-invalid @enderror"
-                                                           id="longitude"
-                                                           name="longitude"
-                                                           value="{{ old('longitude', $kos->longitude) }}"
+                                                           class="glass-input @error('longitude') is-invalid @enderror" 
+                                                           id="longitude" 
+                                                           name="longitude" 
+                                                           value="{{ old('longitude', $kos->longitude) }}" 
                                                            placeholder="106.8456">
                                                     <div class="input-icon">
                                                         <i class="fas fa-map-marker"></i>
@@ -209,10 +209,10 @@
                                                     <span class="required-asterisk">*</span>
                                                 </label>
                                                 <div class="glass-input-wrapper">
-                                                    <input type="number"
-                                                           class="glass-input @error('harga') is-invalid @enderror"
-                                                           id="harga"
-                                                           name="harga"
+                                                    <input type="number" 
+                                                           class="glass-input @error('harga') is-invalid @enderror" 
+                                                           id="harga" 
+                                                           name="harga" 
                                                            value="{{ old('harga', $kos->harga) }}"
                                                            min="0"
                                                            step="1000"
@@ -235,9 +235,9 @@
                                                     <span class="required-asterisk">*</span>
                                                 </label>
                                                 <div class="glass-select-wrapper">
-                                                    <select class="glass-select @error('status_ketersediaan') is-invalid @enderror"
-                                                            id="status_ketersediaan"
-                                                            name="status_ketersediaan"
+                                                    <select class="glass-select @error('status_ketersediaan') is-invalid @enderror" 
+                                                            id="status_ketersediaan" 
+                                                            name="status_ketersediaan" 
                                                             required>
                                                         <option value="tersedia" {{ old('status_ketersediaan', $kos->status_ketersediaan) == 'tersedia' ? 'selected' : '' }}>
                                                             Tersedia
@@ -273,9 +273,9 @@
                                                     <i class="fas fa-star me-2"></i>Fasilitas
                                                 </label>
                                                 <div class="glass-textarea-wrapper">
-                                                    <textarea class="glass-textarea @error('fasilitas') is-invalid @enderror"
-                                                              id="fasilitas"
-                                                              name="fasilitas"
+                                                    <textarea class="glass-textarea @error('fasilitas') is-invalid @enderror" 
+                                                              id="fasilitas" 
+                                                              name="fasilitas" 
                                                               rows="3"
                                                               placeholder="AC, WiFi, Kamar Mandi Dalam, Kasur, Lemari, Meja Belajar">{{ old('fasilitas', $kos->fasilitas) }}</textarea>
                                                     <div class="textarea-icon">
@@ -294,9 +294,9 @@
                                                     <i class="fas fa-align-left me-2"></i>Deskripsi
                                                 </label>
                                                 <div class="glass-textarea-wrapper">
-                                                    <textarea class="glass-textarea @error('deskripsi') is-invalid @enderror"
-                                                              id="deskripsi"
-                                                              name="deskripsi"
+                                                    <textarea class="glass-textarea @error('deskripsi') is-invalid @enderror" 
+                                                              id="deskripsi" 
+                                                              name="deskripsi" 
                                                               rows="4"
                                                               placeholder="Deskripsikan kos Anda secara detail untuk menarik calon penyewa...">{{ old('deskripsi', $kos->deskripsi) }}</textarea>
                                                     <div class="textarea-icon">
@@ -315,7 +315,7 @@
                                 <div class="form-section">
                                     <div class="section-header">
                                         <h6 class="section-title">
-                                            <i class="fas fa-camera me-2"></i>Foto Kontrakan
+                                            <i class="fas fa-camera me-2"></i>Foto Kos
                                         </h6>
                                     </div>
 
@@ -326,8 +326,8 @@
                                             @if($kos->mainPhoto)
                                                 <div class="current-photo">
                                                     <div class="photo-container">
-                                                        <img src="{{ url($kos->mainPhoto->foto_path) }}"
-                                                             alt="{{ $kos->nama_kos }}"
+                                                        <img src="{{ url($kos->mainPhoto->foto_path) }}" 
+                                                             alt="{{ $kos->nama_kos }}" 
                                                              class="current-photo-img"
                                                              id="currentMainPhoto">
                                                         <div class="photo-overlay">
@@ -345,10 +345,10 @@
                                                 <i class="fas fa-upload me-2"></i>Ganti Foto Utama
                                             </label>
                                             <div class="glass-file-wrapper">
-                                                <input type="file"
-                                                       class="glass-file-input @error('foto_utama') is-invalid @enderror"
-                                                       id="foto_utama"
-                                                       name="foto_utama"
+                                                <input type="file" 
+                                                       class="glass-file-input @error('foto_utama') is-invalid @enderror" 
+                                                       id="foto_utama" 
+                                                       name="foto_utama" 
                                                        accept="image/*"
                                                        onchange="previewMainPhoto(this)">
                                                 <label for="foto_utama" class="glass-file-label">
@@ -389,14 +389,14 @@
                                     <!-- Foto Tambahan -->
                                     <div class="additional-photos-section mb-4">
                                         <h6 class="photo-section-title">Foto Tambahan</h6>
-
+                                        
                                         <!-- Foto Tambahan Yang Sudah Ada -->
                                         <div class="current-photos mb-3">
                                             <div class="photos-grid" id="currentPhotosGrid">
                                                 @foreach($kos->photos->where('is_main', false) as $photo)
                                                     <div class="photo-item" data-photo-id="{{ $photo->id }}">
-                                                        <img src="{{ url($photo->foto_path) }}"
-                                                             alt="Foto Tambahan"
+                                                        <img src="{{ url($photo->foto_path) }}" 
+                                                             alt="Foto Tambahan" 
                                                              class="photo-img">
                                                         <div class="photo-overlay">
                                                             <button type="button" class="remove-photo" onclick="deleteExistingPhoto({{ $photo->id }})">
@@ -414,10 +414,10 @@
                                                 <i class="fas fa-upload me-2"></i>Tambah Foto Lainnya
                                             </label>
                                             <div class="glass-file-wrapper">
-                                                <input type="file"
-                                                       class="glass-file-input @error('foto.*') is-invalid @enderror"
-                                                       id="foto"
-                                                       name="foto[]"
+                                                <input type="file" 
+                                                       class="glass-file-input @error('foto.*') is-invalid @enderror" 
+                                                       id="foto" 
+                                                       name="foto[]" 
                                                        accept="image/*"
                                                        multiple
                                                        onchange="previewAdditionalPhotos(this)">
@@ -471,7 +471,7 @@
                                             </div>
                                             <div class="alert-content">
                                                 <strong>Perhatian!</strong>
-                                                <p>Kontrakan ini masih menunggu verifikasi admin. Perubahan yang Anda buat juga akan perlu ditinjau ulang oleh tim admin kami.</p>
+                                                <p>Kos ini masih menunggu verifikasi admin. Perubahan yang Anda buat juga akan perlu ditinjau ulang oleh tim admin kami.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -481,7 +481,7 @@
                                 <div class="form-actions">
                                     <button type="submit" class="glass-btn glass-btn-primary btn-submit">
                                         <i class="fas fa-save me-2"></i>
-                                        <span class="btn-text">Update Kontrakan</span>
+                                        <span class="btn-text">Update Kos</span>
                                         <span class="btn-loading" style="display: none;">
                                             <i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...
                                         </span>
@@ -499,6 +499,8 @@
     </div>
 
     @push('styles')
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
         <style>
             :root {
                 --primary-color: #3b82f6;
@@ -958,7 +960,22 @@
 
             /* Photo Upload Section */
             .photo-upload-section {
-                space-y: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .photo-section-title {
+                font-size: 1rem;
+                color: var(--white);
+                margin-bottom: 1rem;
+                font-weight: 600;
+            }
+
+            .main-photo-section,
+            .additional-photos-section {
+                background: var(--glass-bg);
+                border-radius: 15px;
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
             }
 
             .current-photo,
@@ -973,6 +990,72 @@
                 overflow: hidden;
                 max-width: 300px;
                 margin: 0 auto;
+            }
+
+            /* Photos Grid */
+            .photos-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .photo-item {
+                position: relative;
+                border-radius: 10px;
+                overflow: hidden;
+                aspect-ratio: 1;
+                background: var(--glass-bg);
+                border: 1px solid var(--glass-border);
+            }
+
+            .photo-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .photo-item:hover img {
+                transform: scale(1.05);
+            }
+
+            .photo-item .photo-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .photo-item:hover .photo-overlay {
+                opacity: 1;
+            }
+
+            .remove-photo {
+                background: rgba(239, 68, 68, 0.9);
+                border: none;
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 1rem;
+            }
+
+            .remove-photo:hover {
+                background: #dc2626;
+                transform: scale(1.1);
             }
 
             .current-photo-img,
@@ -1217,19 +1300,85 @@
     @endpush
 
     @push('scripts')
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="/js/photo-upload.js"></script>
         <script>
+            // Initialize Map
+            let map;
+            let marker;
+            
+            function initMap() {
+                // Default center (Indonesia) or use existing coordinates
+                const lat = document.getElementById('latitude').value || -6.2088;
+                const lng = document.getElementById('longitude').value || 106.8456;
+                
+                // Create map
+                map = L.map('map').setView([lat, lng], 13);
+                
+                // Add tile layer (OpenStreetMap)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+                
+                // Add marker if coordinates exist
+                if (lat && lng) {
+                    setMarker([lat, lng]);
+                }
+                
+                // Handle map click
+                map.on('click', function(e) {
+                    const lat = e.latlng.lat;
+                    const lng = e.latlng.lng;
+                    
+                    // Update form inputs
+                    document.getElementById('latitude').value = lat.toFixed(6);
+                    document.getElementById('longitude').value = lng.toFixed(6);
+                    
+                    // Update marker
+                    setMarker([lat, lng]);
+                });
+                
+                // Handle coordinate input changes
+                document.getElementById('latitude').addEventListener('input', updateMapFromInputs);
+                document.getElementById('longitude').addEventListener('input', updateMapFromInputs);
+            }
+            
+            function setMarker(latlng) {
+                if (marker) {
+                    marker.setLatLng(latlng);
+                } else {
+                    marker = L.marker(latlng).addTo(map);
+                }
+                map.setView(latlng);
+            }
+            
+            function updateMapFromInputs() {
+                const lat = parseFloat(document.getElementById('latitude').value);
+                const lng = parseFloat(document.getElementById('longitude').value);
+                
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    setMarker([lat, lng]);
+                }
+            }
+
+            // Initialize map after DOM loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                initMap();
+            });
+
             // Preview image function
             function previewImage(input) {
                 const preview = document.getElementById('photoPreview');
                 const previewImg = document.getElementById('previewImg');
-
+                
                 if (input.files && input.files[0]) {
                     const reader = new FileReader();
-
+                    
                     reader.onload = function(e) {
                         previewImg.src = e.target.result;
                         preview.style.display = 'block';
-
+                        
                         // Add fade in animation
                         preview.style.opacity = '0';
                         setTimeout(() => {
@@ -1237,7 +1386,7 @@
                             preview.style.opacity = '1';
                         }, 10);
                     }
-
+                    
                     reader.readAsDataURL(input.files[0]);
                 } else {
                     preview.style.display = 'none';
@@ -1248,7 +1397,7 @@
             function removePreview() {
                 const preview = document.getElementById('photoPreview');
                 const fileInput = document.getElementById('foto');
-
+                
                 preview.style.display = 'none';
                 fileInput.value = '';
             }
@@ -1258,11 +1407,11 @@
                 const submitBtn = document.querySelector('.btn-submit');
                 const btnText = submitBtn.querySelector('.btn-text');
                 const btnLoading = submitBtn.querySelector('.btn-loading');
-
+                
                 btnText.style.display = 'none';
                 btnLoading.style.display = 'inline-flex';
                 submitBtn.disabled = true;
-
+                
                 // Re-enable after 10 seconds (in case of error)
                 setTimeout(() => {
                     btnText.style.display = 'inline-flex';
@@ -1307,7 +1456,7 @@
             function handleDrop(e) {
                 const dt = e.dataTransfer;
                 const files = dt.files;
-
+                
                 if (files.length > 0) {
                     fileInput.files = files;
                     previewImage(fileInput);
@@ -1321,7 +1470,7 @@
                 if (value) {
                     // Add thousand separators for display
                     const formatted = new Intl.NumberFormat('id-ID').format(value);
-
+                    
                     // Update placeholder to show formatted version
                     if (value !== e.target.value) {
                         e.target.setAttribute('data-formatted', 'Rp ' + formatted);
@@ -1334,13 +1483,13 @@
                 input.addEventListener('focus', function() {
                     this.parentElement.classList.add('focused');
                 });
-
+                
                 input.addEventListener('blur', function() {
                     if (!this.value) {
                         this.parentElement.classList.remove('focused');
                     }
                 });
-
+                
                 // Check initial value
                 if (input.value) {
                     input.parentElement.classList.add('focused');
@@ -1359,13 +1508,13 @@
                     font-size: 0.75rem;
                     pointer-events: none;
                 `;
-
+                
                 textarea.parentElement.appendChild(counter);
-
+                
                 function updateCounter() {
                     const current = textarea.value.length;
                     const maxLength = textarea.getAttribute('maxlength');
-
+                    
                     if (maxLength) {
                         counter.textContent = `${current}/${maxLength}`;
                         if (current > maxLength * 0.9) {
@@ -1377,7 +1526,7 @@
                         counter.textContent = `${current} karakter`;
                     }
                 }
-
+                
                 textarea.addEventListener('input', updateCounter);
                 updateCounter();
             });

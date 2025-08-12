@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Welcome to Rent House')
+@section('title', 'Welcome to Kos Finder')
 
 @section('content')
     <div class="container-fluid p-0 glassmorphism-page">
@@ -21,11 +21,11 @@
                     <div class="col-lg-6">
                         <div class="hero-content">
                             <h1 class="hero-title mb-4">
-                                Temukan <span class="gradient-text">Kontrakan</span>
+                                Temukan <span class="gradient-text">Kos</span>
                                 Impian Anda
                             </h1>
                             <p class="hero-subtitle mb-4">
-                                Temukan rumah kontrakan yang nyaman dan terjangkau di sekitar Anda.
+                                Temukan rumah kos yang nyaman dan terjangkau di sekitar Anda.
                                 Hubungi langsung dengan pemilik dan dapatkan tempat tinggal ideal.
                             </p>
 
@@ -89,7 +89,7 @@
                                 <i class="fas fa-home"></i>
                             </div>
                             <h3 class="stat-number">{{ $totalKos }}</h3>
-                            <p class="stat-label">Kontrakan Terverifikasi</p>
+                            <p class="stat-label">Kos Terverifikasi</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -119,8 +119,8 @@
             <div class="featured-section py-5">
                 <div class="container">
                     <div class="section-header text-center mb-5">
-                        <h2 class="section-title">Kontrakan <span class="gradient-text">Unggulan</span></h2>
-                        <p class="section-subtitle">Listing kontrakan terbaru dan terverifikasi</p>
+                        <h2 class="section-title">Kos <span class="gradient-text">Unggulan</span></h2>
+                        <p class="section-subtitle">Listing kos terbaru dan terverifikasi</p>
                     </div>
 
                     <div class="row g-4">
@@ -128,8 +128,8 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="glass-card kos-card h-100">
                                     <div class="kos-image-container">
-                                        @if($kos->foto)
-                                            <img src="{{ asset($kos->foto) }}" class="kos-image" alt="{{ $kos->nama_kos }}">
+                                        @if($kos->mainPhoto)
+                                            <img src="{{ asset($kos->mainPhoto->foto_path) }}" class="kos-image" alt="{{ $kos->nama_kos }}">
                                         @else
                                             <div class="kos-image-placeholder">
                                                 <i class="fas fa-home"></i>
@@ -181,7 +181,7 @@
 
                     <div class="text-center mt-5">
                         <a href="{{ route('public.search') }}" class="btn glass-btn glass-btn-outline glass-btn-lg">
-                            <i class="fas fa-th me-2"></i>Lihat Semua Kontrakan
+                            <i class="fas fa-th me-2"></i>Lihat Semua Kos
                         </a>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
         <div class="features-section py-5">
             <div class="container">
                 <div class="section-header text-center mb-5">
-                    <h2 class="section-title">Why Choose <span class="gradient-text">Rent House?</span></h2>
+                    <h2 class="section-title">Why Choose <span class="gradient-text">Kos Finder?</span></h2>
                     <p class="section-subtitle">We make finding and managing boarding houses simple and efficient</p>
                 </div>
 
@@ -203,7 +203,7 @@
                                 <i class="fas fa-search"></i>
                             </div>
                             <h5 class="feature-title">Easy Search</h5>
-                            <p class="feature-description">Find House by location, price range, and facilities with our
+                            <p class="feature-description">Find kos by location, price range, and facilities with our
                                 advanced
                                 search filters.</p>
                         </div>
@@ -215,7 +215,7 @@
                                 <i class="fas fa-shield-alt"></i>
                             </div>
                             <h5 class="feature-title">Verified Listings</h5>
-                            <p class="feature-description">All House listings are verified by our admin team to ensure quality
+                            <p class="feature-description">All kos listings are verified by our admin team to ensure quality
                                 and
                                 authenticity.</p>
                         </div>
@@ -227,7 +227,7 @@
                                 <i class="fas fa-phone"></i>
                             </div>
                             <h5 class="feature-title">Direct Contact</h5>
-                            <p class="feature-description">Connect directly with House owners for inquiries and bookings
+                            <p class="feature-description">Connect directly with kos owners for inquiries and bookings
                                 without
                                 any middleman.</p>
                         </div>
@@ -242,7 +242,7 @@
                 <div class="glass-card cta-card text-center">
                     <h2 class="cta-title mb-4">Siap untuk <span class="gradient-text">Memulai?</span></h2>
                     @guest
-                        <p class="cta-subtitle mb-4">Bergabunglah dengan ribuan pengguna yang telah menemukan kontrakan impian mereka
+                        <p class="cta-subtitle mb-4">Bergabunglah dengan ribuan pengguna yang telah menemukan kos impian mereka
                             melalui platform kami.</p>
                         <div class="cta-actions">
                             <a href="{{ route('register') }}" class="btn glass-btn glass-btn-primary me-3">

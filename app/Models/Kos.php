@@ -14,10 +14,11 @@ class Kos extends Model
     protected $fillable = [
         'nama_kos',
         'lokasi',
+        'latitude',
+        'longitude',
         'harga',
         'fasilitas',
         'deskripsi',
-        'foto',
         'status_ketersediaan',
         'user_id',
         'is_verified',
@@ -58,5 +59,21 @@ class Kos extends Model
     public function scopeAvailable($query)
     {
         return $query->where('status_ketersediaan', 'tersedia');
+    }
+
+    /**
+     * Get the photos for the kos.
+     */
+    public function photos()
+    {
+        return $this->hasMany(KosPhoto::class);
+    }
+
+    /**
+     * Get the main photo for the kos.
+     */
+    public function mainPhoto()
+    {
+        return $this->hasOne(KosPhoto::class)->where('is_main', true);
     }
 }

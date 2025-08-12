@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Kontrakan Baru - Rent House')
+@section('title', 'Tambah Kos Baru - Kos Finder')
 
 @section('content')
     <div class="container-fluid glassmorphism-add-kos">
@@ -15,13 +15,13 @@
                                     <i class="fas fa-plus-circle"></i>
                                 </div>
                                 <div class="header-text">
-                                    <h1 class="page-title">Tambah Kontrakan Baru</h1>
-                                    <p class="page-subtitle">Buat listing kontrakan baru dan jangkau ribuan calon penyewa</p>
+                                    <h1 class="page-title">Tambah Kos Baru</h1>
+                                    <p class="page-subtitle">Buat listing kos baru dan jangkau ribuan calon penyewa</p>
                                 </div>
                             </div>
                             <div class="header-actions">
                                 <a href="{{ route('pemilik.my-kos') }}" class="glass-btn glass-btn-outline">
-                                    <i class="fas fa-arrow-left me-2"></i>Kembali ke Kontrakan Saya
+                                    <i class="fas fa-arrow-left me-2"></i>Kembali ke Kos Saya
                                 </a>
                             </div>
                         </div>
@@ -66,14 +66,14 @@
 
                                 <div class="form-group">
                                     <label for="nama_kos" class="glass-label required">
-                                        <i class="fas fa-home me-2"></i>Nama Kontrakan
+                                        <i class="fas fa-home me-2"></i>Nama Kos
                                     </label>
                                     <div class="glass-input-wrapper">
-                                        <input type="text"
-                                               class="glass-input @error('nama_kos') is-invalid @enderror"
-                                               id="nama_kos"
-                                               name="nama_kos"
-                                               value="{{ old('nama_kos') }}"
+                                        <input type="text" 
+                                               class="glass-input @error('nama_kos') is-invalid @enderror" 
+                                               id="nama_kos" 
+                                               name="nama_kos" 
+                                               value="{{ old('nama_kos') }}" 
                                                placeholder="Contoh: Kos Mawar Indah"
                                                required>
                                         <div class="input-icon">
@@ -96,11 +96,11 @@
                                         <i class="fas fa-map-marker-alt me-2"></i>Lokasi Lengkap
                                     </label>
                                     <div class="glass-input-wrapper">
-                                        <input type="text"
-                                               class="glass-input @error('lokasi') is-invalid @enderror"
-                                               id="lokasi"
-                                               name="lokasi"
-                                               value="{{ old('lokasi') }}"
+                                        <input type="text" 
+                                               class="glass-input @error('lokasi') is-invalid @enderror" 
+                                               id="lokasi" 
+                                               name="lokasi" 
+                                               value="{{ old('lokasi') }}" 
                                                placeholder="Jl. Sudirman No. 123, Jakarta Pusat"
                                                required>
                                         <div class="input-icon">
@@ -126,12 +126,12 @@
                                                 <i class="fas fa-map-pin me-2"></i>Latitude
                                             </label>
                                             <div class="glass-input-wrapper">
-                                                <input type="number"
+                                                <input type="number" 
                                                        step="any"
-                                                       class="glass-input @error('latitude') is-invalid @enderror"
-                                                       id="latitude"
-                                                       name="latitude"
-                                                       value="{{ old('latitude') }}"
+                                                       class="glass-input @error('latitude') is-invalid @enderror" 
+                                                       id="latitude" 
+                                                       name="latitude" 
+                                                       value="{{ old('latitude') }}" 
                                                        placeholder="-6.2088">
                                                 <div class="input-icon">
                                                     <i class="fas fa-map-marker"></i>
@@ -150,12 +150,12 @@
                                                 <i class="fas fa-map-pin me-2"></i>Longitude
                                             </label>
                                             <div class="glass-input-wrapper">
-                                                <input type="number"
+                                                <input type="number" 
                                                        step="any"
-                                                       class="glass-input @error('longitude') is-invalid @enderror"
-                                                       id="longitude"
-                                                       name="longitude"
-                                                       value="{{ old('longitude') }}"
+                                                       class="glass-input @error('longitude') is-invalid @enderror" 
+                                                       id="longitude" 
+                                                       name="longitude" 
+                                                       value="{{ old('longitude') }}" 
                                                        placeholder="106.8456">
                                                 <div class="input-icon">
                                                     <i class="fas fa-map-marker"></i>
@@ -187,11 +187,11 @@
                                         <i class="fas fa-money-bill-wave me-2"></i>Harga per Bulan (Rp)
                                     </label>
                                     <div class="glass-input-wrapper">
-                                        <input type="number"
-                                               class="glass-input @error('harga') is-invalid @enderror"
-                                               id="harga"
-                                               name="harga"
-                                               value="{{ old('harga') }}"
+                                        <input type="number" 
+                                               class="glass-input @error('harga') is-invalid @enderror" 
+                                               id="harga" 
+                                               name="harga" 
+                                               value="{{ old('harga') }}" 
                                                min="0"
                                                step="50000"
                                                placeholder="1500000"
@@ -235,9 +235,9 @@
                                         <i class="fas fa-star me-2"></i>Fasilitas
                                     </label>
                                     <div class="glass-textarea-wrapper">
-                                        <textarea class="glass-textarea @error('fasilitas') is-invalid @enderror"
-                                                  id="fasilitas"
-                                                  name="fasilitas"
+                                        <textarea class="glass-textarea @error('fasilitas') is-invalid @enderror" 
+                                                  id="fasilitas" 
+                                                  name="fasilitas" 
                                                   rows="4"
                                                   placeholder="AC, WiFi, Kamar Mandi Dalam, Kasur, Lemari, Meja Belajar">{{ old('fasilitas') }}</textarea>
                                     </div>
@@ -258,7 +258,7 @@
                                             <span class="suggestion-tag" onclick="addFacility('Lemari')">Lemari</span>
                                             <span class="suggestion-tag" onclick="addFacility('Meja Belajar')">Meja Belajar</span>
                                             <span class="suggestion-tag" onclick="addFacility('Kursi')">Kursi</span>
-                                            <span class="suggestion-tag" onclick="addFacility('Garasi')">Garasi</span>
+                                            <span class="suggestion-tag" onclick="addFacility('Parkir Motor')">Parkir Motor</span>
                                         </div>
                                     </div>
                                 </div>
@@ -268,9 +268,9 @@
                                         <i class="fas fa-align-left me-2"></i>Deskripsi
                                     </label>
                                     <div class="glass-textarea-wrapper">
-                                        <textarea class="glass-textarea @error('deskripsi') is-invalid @enderror"
-                                                  id="deskripsi"
-                                                  name="deskripsi"
+                                        <textarea class="glass-textarea @error('deskripsi') is-invalid @enderror" 
+                                                  id="deskripsi" 
+                                                  name="deskripsi" 
                                                   rows="5"
                                                   placeholder="Deskripsikan kos Anda secara detail, lingkungan sekitar, dan keunggulan yang ditawarkan...">{{ old('deskripsi') }}</textarea>
                                         <div class="character-count">
@@ -291,13 +291,13 @@
                                 <!-- Foto Utama -->
                                 <div class="form-group">
                                     <label class="glass-label required">
-                                        <i class="fas fa-camera me-2"></i>Foto Utama Kontrakan
+                                        <i class="fas fa-camera me-2"></i>Foto Utama Kos
                                     </label>
                                     <div class="glass-file-upload" id="mainPhotoUpload">
-                                        <input type="file"
-                                               class="file-input @error('foto_utama') is-invalid @enderror"
-                                               id="fotoUtama"
-                                               name="foto_utama"
+                                        <input type="file" 
+                                               class="file-input @error('foto_utama') is-invalid @enderror" 
+                                               id="fotoUtama" 
+                                               name="foto_utama" 
                                                accept="image/*"
                                                required>
                                         <div class="upload-area">
@@ -334,10 +334,10 @@
                                         <i class="fas fa-images me-2"></i>Foto Tambahan
                                     </label>
                                     <div class="glass-file-upload" id="additionalPhotosUpload">
-                                        <input type="file"
-                                               class="file-input @error('foto.*') is-invalid @enderror"
-                                               id="fotoTambahan"
-                                               name="foto[]"
+                                        <input type="file" 
+                                               class="file-input @error('foto.*') is-invalid @enderror" 
+                                               id="fotoTambahan" 
+                                               name="foto[]" 
                                                accept="image/*"
                                                multiple>
                                         <div class="upload-area">
@@ -364,18 +364,29 @@
                                     </div>
                                 </div>
 
+                                <div class="step-navigation">
+                                    <button type="button" class="glass-btn glass-btn-outline prev-step">
+                                        <i class="fas fa-arrow-left me-2"></i>Sebelumnya
+                                    </button>
+                                    <button type="button" class="glass-btn glass-btn-primary next-step">
+                                        Selanjutnya
+                                        <i class="fas fa-arrow-right ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+
                             <!-- Step 3: Review -->
                             <div class="form-step" id="step3">
                                 <div class="step-header">
                                     <h4 class="step-title">
                                         <i class="fas fa-check-circle me-2"></i>Review & Submit
                                     </h4>
-                                    <p class="step-subtitle">Periksa kembali informasi kontrakan sebelum menyimpan</p>
+                                    <p class="step-subtitle">Periksa kembali informasi kos sebelum menyimpan</p>
                                 </div>
 
                                 <div class="review-card">
                                     <div class="review-header">
-                                        <h5>Preview Listing Kontrakan Anda</h5>
+                                        <h5>Preview Listing Kos Anda</h5>
                                     </div>
                                     <div class="review-content">
                                         <div class="review-image">
@@ -388,7 +399,7 @@
                                         </div>
                                         <div class="review-details">
                                             <div class="review-item">
-                                                <label>Nama Kontrakan:</label>
+                                                <label>Nama Kos:</label>
                                                 <span id="reviewNama">-</span>
                                             </div>
                                             <div class="review-item">
@@ -418,7 +429,7 @@
                                     <div class="notice-content">
                                         <h6>Catatan Penting:</h6>
                                         <ul>
-                                            <li>Listing kontrakan Anda akan direview oleh tim admin sebelum ditampilkan</li>
+                                            <li>Listing kos Anda akan direview oleh tim admin sebelum ditampilkan</li>
                                             <li>Proses verifikasi biasanya memakan waktu 1-2 hari kerja</li>
                                             <li>Pastikan semua informasi yang dimasukkan sudah benar</li>
                                             <li>Anda akan mendapat notifikasi via email saat listing disetujui</li>
@@ -432,7 +443,7 @@
                                     </button>
                                     <button type="submit" class="glass-btn glass-btn-primary submit-btn">
                                         <i class="fas fa-save me-2"></i>
-                                        <span class="btn-text">Simpan Kontrakan</span>
+                                        <span class="btn-text">Simpan Kos</span>
                                         <span class="btn-loading" style="display: none;">
                                             <i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...
                                         </span>
@@ -529,7 +540,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background:
+                background: 
                     radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
                     radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
                     radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
@@ -912,7 +923,8 @@
                 cursor: pointer;
             }
 
-            .upload-area:hover {
+            .upload-area:hover,
+            .upload-area.drop-zone {
                 background: var(--glass-bg-light);
                 border-color: rgba(255, 255, 255, 0.4);
                 transform: translateY(-2px);
@@ -943,6 +955,7 @@
                 overflow: hidden;
                 background: var(--glass-bg);
                 border: 1px solid var(--glass-border);
+                margin-top: 1rem;
             }
 
             .image-preview img {
@@ -951,12 +964,54 @@
                 object-fit: cover;
             }
 
-            .remove-image {
+            /* Foto Utama Badge */
+            .main-photo-badge {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background: rgba(59, 130, 246, 0.9);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            /* Photos Preview Grid */
+            .photos-preview {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .photo-item {
+                position: relative;
+                border-radius: 10px;
+                overflow: hidden;
+                background: var(--glass-bg);
+                border: 1px solid var(--glass-border);
+                aspect-ratio: 1;
+            }
+
+            .photo-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .photo-item:hover img {
+                transform: scale(1.05);
+            }
+
+            .remove-photo {
                 position: absolute;
                 top: 10px;
                 right: 10px;
-                width: 30px;
-                height: 30px;
+                width: 25px;
+                height: 25px;
                 border-radius: 50%;
                 background: rgba(239, 68, 68, 0.9);
                 color: var(--white);
@@ -966,11 +1021,25 @@
                 align-items: center;
                 justify-content: center;
                 transition: all 0.3s ease;
+                z-index: 2;
             }
 
-            .remove-image:hover {
+            .remove-photo:hover {
                 background: #dc2626;
                 transform: scale(1.1);
+            }
+
+            /* Responsive Design for Photos */
+            @media (max-width: 768px) {
+                .photos-preview {
+                    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                    gap: 0.5rem;
+                }
+
+                .main-photo-badge {
+                    font-size: 0.7rem;
+                    padding: 0.3rem 0.8rem;
+                }
             }
 
             /* Input Help */
@@ -1368,7 +1437,14 @@
         </style>
     @endpush
 
+    @push('styles')
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    @endpush
+
     @push('scripts')
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
         <script>
             let currentStep = 1;
             const totalSteps = 3;
@@ -1485,16 +1561,72 @@
                 }, 1000);
             }
 
-            // File Upload
-            const fileInput = document.getElementById('foto');
-            const uploadArea = document.querySelector('.upload-area');
-            const imagePreview = document.getElementById('imagePreview');
-            const previewImg = document.getElementById('previewImg');
+            // Foto Utama Upload
+            const fotoUtama = document.getElementById('fotoUtama');
+            const mainPhotoUpload = document.getElementById('mainPhotoUpload');
+            const mainImagePreview = document.getElementById('mainImagePreview');
+            const mainPreviewImg = document.getElementById('mainPreviewImg');
 
-            fileInput.addEventListener('change', handleFileSelect);
-            uploadArea.addEventListener('dragover', handleDragOver);
-            uploadArea.addEventListener('drop', handleDrop);
-            uploadArea.addEventListener('click', () => fileInput.click());
+            fotoUtama.addEventListener('change', handleMainPhotoSelect);
+            mainPhotoUpload.querySelector('.upload-area').addEventListener('dragover', handleMainDragOver);
+            mainPhotoUpload.querySelector('.upload-area').addEventListener('dragleave', handleMainDragLeave);
+            mainPhotoUpload.querySelector('.upload-area').addEventListener('drop', handleMainDrop);
+            mainPhotoUpload.querySelector('.upload-area').addEventListener('click', () => fotoUtama.click());
+
+            function handleMainPhotoSelect(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    displayMainPhoto(file);
+                }
+            }
+
+            function handleMainDragOver(e) {
+                e.preventDefault();
+                e.target.classList.add('drop-zone');
+            }
+
+            function handleMainDragLeave(e) {
+                e.preventDefault();
+                e.target.classList.remove('drop-zone');
+            }
+
+            function handleMainDrop(e) {
+                e.preventDefault();
+                e.target.classList.remove('drop-zone');
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    fotoUtama.files = e.dataTransfer.files;
+                    displayMainPhoto(file);
+                }
+            }
+
+            function displayMainPhoto(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    mainPreviewImg.src = e.target.result;
+                    mainPhotoUpload.querySelector('.upload-area').style.display = 'none';
+                    mainImagePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function removeMainPhoto() {
+                fotoUtama.value = '';
+                mainPhotoUpload.querySelector('.upload-area').style.display = 'block';
+                mainImagePreview.style.display = 'none';
+                mainPreviewImg.src = '';
+            }
+
+            // Foto Tambahan Upload
+            const fotoTambahan = document.getElementById('fotoTambahan');
+            const additionalPhotosUpload = document.getElementById('additionalPhotosUpload');
+            const additionalPhotosPreview = document.getElementById('additionalPhotosPreview');
+
+            fotoTambahan.addEventListener('change', handleAdditionalPhotosSelect);
+            additionalPhotosUpload.querySelector('.upload-area').addEventListener('dragover', handleAdditionalDragOver);
+            additionalPhotosUpload.querySelector('.upload-area').addEventListener('dragleave', handleAdditionalDragLeave);
+            additionalPhotosUpload.querySelector('.upload-area').addEventListener('drop', handleAdditionalDrop);
+            additionalPhotosUpload.querySelector('.upload-area').addEventListener('click', () => fotoTambahan.click());
 
             function handleFileSelect(e) {
                 const file = e.target.files[0];
@@ -1503,47 +1635,73 @@
                 }
             }
 
-            function handleDragOver(e) {
-                e.preventDefault();
-                uploadArea.style.background = 'var(--glass-bg-light)';
-                uploadArea.style.borderColor = 'rgba(255, 255, 255, 0.4)';
-            }
-
-            function handleDrop(e) {
-                e.preventDefault();
-                uploadArea.style.background = 'var(--glass-bg)';
-                uploadArea.style.borderColor = 'var(--glass-border)';
-
-                const file = e.dataTransfer.files[0];
-                if (file && file.type.startsWith('image/')) {
-                    fileInput.files = e.dataTransfer.files;
-                    displayImage(file);
+            function handleAdditionalPhotosSelect(e) {
+                const files = Array.from(e.target.files);
+                if (files.length > 5) {
+                    alert('Maksimal 5 foto tambahan yang diperbolehkan');
+                    fotoTambahan.value = '';
+                    return;
                 }
+                handleAdditionalPhotos(files);
             }
 
-            function displayImage(file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                    uploadArea.style.display = 'none';
-                    imagePreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
+            function handleAdditionalDragOver(e) {
+                e.preventDefault();
+                e.target.classList.add('drop-zone');
             }
 
-            function removeImage() {
-                fileInput.value = '';
-                uploadArea.style.display = 'block';
-                imagePreview.style.display = 'none';
-                previewImg.src = '';
+            function handleAdditionalDragLeave(e) {
+                e.preventDefault();
+                e.target.classList.remove('drop-zone');
+            }
+
+            function handleAdditionalDrop(e) {
+                e.preventDefault();
+                e.target.classList.remove('drop-zone');
+                const files = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith('image/'));
+                if (files.length > 5) {
+                    alert('Maksimal 5 foto tambahan yang diperbolehkan');
+                    return;
+                }
+                fotoTambahan.files = e.dataTransfer.files;
+                handleAdditionalPhotos(files);
+            }
+
+            function handleAdditionalPhotos(files) {
+                additionalPhotosPreview.innerHTML = ''; // Clear existing previews
+                files.forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const photoDiv = document.createElement('div');
+                        photoDiv.className = 'photo-item';
+                        photoDiv.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview ${index + 1}">
+                            <button type="button" class="remove-photo" onclick="removeAdditionalPhoto(this)">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        `;
+                        additionalPhotosPreview.appendChild(photoDiv);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            function removeAdditionalPhoto(button) {
+                const photoItem = button.closest('.photo-item');
+                photoItem.remove();
+                
+                // Reset file input if all photos are removed
+                if (additionalPhotosPreview.children.length === 0) {
+                    fotoTambahan.value = '';
+                }
             }
 
             // Update Review
             function updateReview() {
-                document.getElementById('reviewNama').textContent =
+                document.getElementById('reviewNama').textContent = 
                     document.getElementById('nama_kos').value || '-';
 
-                document.getElementById('reviewLokasi').textContent =
+                document.getElementById('reviewLokasi').textContent = 
                     document.getElementById('lokasi').value || '-';
 
                 const harga = document.getElementById('harga').value;
@@ -1558,10 +1716,10 @@
                     document.getElementById('reviewHarga').textContent = '-';
                 }
 
-                document.getElementById('reviewFasilitas').textContent =
+                document.getElementById('reviewFasilitas').textContent = 
                     document.getElementById('fasilitas').value || '-';
 
-                document.getElementById('reviewDeskripsi').textContent =
+                document.getElementById('reviewDeskripsi').textContent = 
                     document.getElementById('deskripsi').value || '-';
 
                 // Update image preview
@@ -1639,6 +1797,71 @@
                 localStorage.setItem('kosDraft', JSON.stringify(formData));
                 console.log('Draft saved automatically');
             }
+
+            // Initialize Map
+            let map;
+            let marker;
+            
+            function initMap() {
+                // Default center (Indonesia)
+                const defaultLat = -6.2088;
+                const defaultLng = 106.8456;
+                
+                // Create map
+                map = L.map('map').setView([defaultLat, defaultLng], 13);
+                
+                // Add tile layer (OpenStreetMap)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+                
+                // Add marker if coordinates exist
+                const lat = document.getElementById('latitude').value;
+                const lng = document.getElementById('longitude').value;
+                if (lat && lng) {
+                    setMarker([lat, lng]);
+                }
+                
+                // Handle map click
+                map.on('click', function(e) {
+                    const lat = e.latlng.lat;
+                    const lng = e.latlng.lng;
+                    
+                    // Update form inputs
+                    document.getElementById('latitude').value = lat.toFixed(6);
+                    document.getElementById('longitude').value = lng.toFixed(6);
+                    
+                    // Update marker
+                    setMarker([lat, lng]);
+                });
+                
+                // Handle coordinate input changes
+                document.getElementById('latitude').addEventListener('input', updateMapFromInputs);
+                document.getElementById('longitude').addEventListener('input', updateMapFromInputs);
+            }
+            
+            function setMarker(latlng) {
+                if (marker) {
+                    marker.setLatLng(latlng);
+                } else {
+                    marker = L.marker(latlng).addTo(map);
+                }
+                map.setView(latlng);
+            }
+            
+            function updateMapFromInputs() {
+                const lat = parseFloat(document.getElementById('latitude').value);
+                const lng = parseFloat(document.getElementById('longitude').value);
+                
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    setMarker([lat, lng]);
+                }
+            }
+
+            // Initialize map after DOM loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                initMap();
+            });
 
             // Load draft on page load
             window.addEventListener('load', function() {

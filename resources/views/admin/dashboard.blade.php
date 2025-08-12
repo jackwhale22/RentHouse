@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Dashboard - Rent House')
+@section('title', 'Admin Dashboard - Kos Finder')
 
 @section('content')
     <div class="container-fluid glassmorphism-dashboard">

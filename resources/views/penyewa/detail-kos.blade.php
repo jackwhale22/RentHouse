@@ -27,9 +27,10 @@
                 <div class="col-lg-8">
                     <div class="glass-card main-card">
                         <!-- Kos Image -->
+                        <!-- Kos Image -->
                         <div class="kos-image-hero">
-                            @if($kos->foto)
-                                <img src="{{ asset($kos->foto) }}" class="hero-image" alt="{{ $kos->nama_kos }}">
+                            @if($kos->mainPhoto)
+                                <img src="{{ asset($kos->mainPhoto->foto_path) }}" class="hero-image" alt="{{ $kos->nama_kos }}">
                             @else
                                 <div class="hero-image-placeholder">
                                     <i class="fas fa-home"></i>
@@ -49,7 +50,26 @@
                             </div>
                         </div>
 
-                        <!-- Kos Content -->
+                        <!-- Photo Gallery -->
+                        @if($kos->photos && $kos->photos->where('is_main', 0)->count() > 0)
+                        <div class="photo-gallery">
+                            <div class="photos-grid">
+                                @foreach($kos->photos->where('is_main', 0)->take(4) as $photo)
+                                    <div class="gallery-item">
+                                        <img src="{{ asset($photo->foto_path) }}" 
+                                             alt="Foto {{ $kos->nama_kos }}"
+                                             class="gallery-image"
+                                             onclick="showFullImage('{{ asset($photo->foto_path) }}', '{{ $kos->nama_kos }}')">
+                                    </div>
+                                @endforeach
+                            </div>
+                            @if($kos->photos->where('is_main', 0)->count() > 4)
+                                <div class="more-photos">
+                                    <span>+{{ $kos->photos->where('is_main', 0)->count() - 4 }} foto lainnya</span>
+                                </div>
+                            @endif
+                        </div>
+                        @endif                        <!-- Kos Content -->
                         <div class="kos-main-content">
                             <div class="kos-header mb-4">
                                 <h1 class="kos-title">{{ $kos->nama_kos }}</h1>
@@ -232,6 +252,23 @@
                 </div>
             </div>
 
+            <!-- Map Section -->
+            @if($kos->latitude && $kos->longitude)
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="glass-card">
+                            <div class="card-body">
+                                <h5 class="section-title mb-3">
+                                    <i class="fas fa-map-marker-alt section-icon location"></i>
+                                    Lokasi pada Peta
+                                </h5>
+                                <div id="map" style="height: 400px;" class="rounded"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <!-- Similar Kos -->
             @php
                 $similarKos = \App\Models\Kos::verified()->available()
@@ -406,7 +443,19 @@
                 position: relative;
                 overflow: hidden;
             }
-
+            /* Map Styles */
+            .map-section {
+                margin-top: 2rem;
+            }
+            .map-container {
+                border-radius: 15px;
+                overflow: hidden;
+                position: relative;
+            }
+            .map-container #map {
+                width: 100%;
+                height: 400px;
+}
             .glass-card::before {
                 content: '';
                 position: absolute;
@@ -1085,6 +1134,107 @@
                 padding: 0 1.5rem 1.5rem;
             }
 
+            /* Photo Gallery */
+            .photo-gallery {
+                padding: 1.5rem;
+                background: var(--glass-bg-dark);
+            }
+
+            .photos-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1rem;
+            }
+
+            .gallery-item {
+                position: relative;
+                padding-bottom: 75%; /* 4:3 aspect ratio */
+                overflow: hidden;
+                border-radius: 12px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .gallery-item:hover {
+                transform: scale(1.05);
+            }
+
+            .gallery-image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .more-photos {
+                margin-top: 1rem;
+                text-align: center;
+                color: var(--white);
+                font-weight: 600;
+                padding: 0.5rem;
+                background: var(--glass-bg);
+                border-radius: 8px;
+            }
+
+            /* Modal Styles */
+            .photo-modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.9);
+                z-index: 9999;
+                padding: 2rem;
+                overflow: auto;
+            }
+
+            .modal-content {
+                position: relative;
+                max-width: 90%;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .modal-image {
+                max-width: 100%;
+                max-height: 90vh;
+                margin: 0 auto;
+                border-radius: 8px;
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .close-modal {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: rgba(255, 255, 255, 0.2);
+                border: none;
+                color: white;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+            }
+
+            .close-modal:hover {
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(1.1);
+            }
+
+            .modal-caption {
+                color: white;
+                margin-top: 1rem;
+                font-size: 1.1rem;
+            }
+
             /* Form Group */
             .form-group {
                 margin-bottom: 1.5rem;
@@ -1215,7 +1365,46 @@
         </style>
     @endpush
 
+    <!-- Photo Modal -->
+    <div id="photoModal" class="photo-modal">
+        <button class="close-modal" onclick="closeModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <div id="modalCaption" class="modal-caption"></div>
+        </div>
+    </div>
+
     @push('scripts')
+    <!-- Leaflet JS -->
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if($kos->latitude && $kos->longitude)
+            // Initialize map
+            const map = L.map('map').setView([{{ $kos->latitude }}, {{ $kos->longitude }}], 15);
+
+            // Add tile layer (OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Add marker for kos location
+            const marker = L.marker([{{ $kos->latitude }}, {{ $kos->longitude }}])
+                .addTo(map)
+                .bindPopup("<strong>{{ $kos->nama_kos }}</strong><br>{{ $kos->lokasi }}")
+                .openPopup();
+
+            // Make map responsive
+            window.addEventListener('resize', function() {
+                map.invalidateSize();
+            });
+        @endif
+    });
+</script>
         <script>
             // Add ripple effect to buttons
             document.querySelectorAll('.glass-btn').forEach(button => {
@@ -1292,6 +1481,39 @@
                 }
             `;
             document.head.appendChild(style);
+
+            // Photo Modal Functions
+            window.showFullImage = function(src, caption) {
+                const modal = document.getElementById('photoModal');
+                const modalImg = document.getElementById('modalImage');
+                const modalCaption = document.getElementById('modalCaption');
+                
+                modal.style.display = 'block';
+                modalImg.src = src;
+                modalCaption.textContent = caption;
+                
+                document.body.style.overflow = 'hidden';
+            }
+
+            window.closeModal = function() {
+                const modal = document.getElementById('photoModal');
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            // Close modal when clicking outside the image
+            document.getElementById('photoModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            // Close modal with escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
         </script>
     @endpush
 @endsection

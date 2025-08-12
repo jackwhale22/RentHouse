@@ -12,11 +12,6 @@ WORKDIR /app
 COPY . ./
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader \
-    && cp .env.example .env \
-    && sed -i 's/DB_HOST=127.0.0.1/# DB_HOST=127.0.0.1/' .env \
-    && sed -i 's/DB_PORT=3306/# DB_PORT=3306/' .env \
-    && sed -i 's/DB_USERNAME=root/# DB_USERNAME=root/' .env \
-    && sed -i 's/DB_PASSWORD=/# DB_PASSWORD=/' .env \
     && php artisan key:generate \
     && php artisan storage:link \
     && chmod -R 775 storage/ \

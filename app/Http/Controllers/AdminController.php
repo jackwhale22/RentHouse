@@ -47,9 +47,12 @@ class AdminController extends Controller
     {
         $kos = Kos::findOrFail($id);
 
-        // Delete photo if exists
-        if ($kos->foto && file_exists(public_path($kos->foto))) {
-            unlink(public_path($kos->foto));
+        // Delete all photos
+        foreach($kos->photos as $photo) {
+            if (file_exists(public_path($photo->foto_path))) {
+                unlink(public_path($photo->foto_path));
+            }
+            $photo->delete();
         }
 
         $kos->delete();

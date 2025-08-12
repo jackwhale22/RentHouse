@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;  // atau use PDF; jika menggunakan alias
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\MessagesExport;
+
 class PemilikController extends Controller
 {
     public function dashboard()
@@ -44,24 +45,57 @@ class PemilikController extends Controller
     {
         $request->validate([
             'nama_kos' => 'required|string|max:255',
-            'lokasi' => 'required|string|max:255',
-            'harga' => 'required|numeric|min:0',
+            'lokasi' => 'required|string',
+            'longitude' => 'nullable|numeric|between:-180,180',
+            'latitude' => 'nullable|numeric|between:-90,90',
+            'harga' => 'required|numeric',
             'fasilitas' => 'nullable|string',
             'deskripsi' => 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto_utama' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $data = $request->all();
+        // Ambil data dasar untuk kos
+        $data = $request->only([
+            'nama_kos',
+            'lokasi',
+            'longitude',
+            'latitude',
+            'harga',
+            'fasilitas',
+            'deskripsi',
+        ]);
+        
         $data['user_id'] = Auth::id();
+        $data['status_ketersediaan'] = 'tersedia'; // default value
+        
+        // Create kos first
+        $kos = Kos::create($data);
 
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $filename = time() . '.' . $foto->getClientOriginalExtension();
-            $foto->move(public_path('uploads/kos'), $filename);
-            $data['foto'] = 'uploads/kos/' . $filename;
+        // Handle main photo
+        if ($request->hasFile('foto_utama')) {
+            $mainPhoto = $request->file('foto_utama');
+            $mainPhotoName = time() . '_main.' . $mainPhoto->getClientOriginalExtension();
+            $mainPhoto->move(public_path('uploads/kos'), $mainPhotoName);
+
+            $kos->photos()->create([
+                'foto_path' => 'uploads/kos/' . $mainPhotoName,
+                'is_main' => true
+            ]);
         }
 
-        Kos::create($data);
+        // Handle additional photos
+        if ($request->hasFile('foto')) {
+            foreach($request->file('foto') as $photo) {
+                $photoName = time() . '_' . uniqid() . '.' . $photo->getClientOriginalExtension();
+                $photo->move(public_path('uploads/kos'), $photoName);
+
+                $kos->photos()->create([
+                    'foto_path' => 'uploads/kos/' . $photoName,
+                    'is_main' => false
+                ]);
+            }
+        }
 
         return redirect()->route('pemilik.my-kos')->with('success', 'Kos berhasil ditambahkan dan menunggu verifikasi admin');
     }
@@ -77,27 +111,46 @@ class PemilikController extends Controller
         $kos = Kos::where('user_id', Auth::id())->findOrFail($id);
 
         $request->validate([
-            'nama_kos' => 'required|string|max:255',
-            'lokasi' => 'required|string|max:255',
-            'harga' => 'required|numeric|min:0',
-            'fasilitas' => 'nullable|string',
-            'deskripsi' => 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status_ketersediaan' => 'required|in:tersedia,tidak_tersedia',
+            'foto.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto_utama' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $data = $request->all();
 
-        if ($request->hasFile('foto')) {
-            // Delete old photo
-            if ($kos->foto && file_exists(public_path($kos->foto))) {
-                unlink(public_path($kos->foto));
+        // Update main photo if provided
+        if ($request->hasFile('foto_utama')) {
+            // Delete old main photo if exists
+            $oldMainPhoto = $kos->mainPhoto;
+            if ($oldMainPhoto) {
+                if (file_exists(public_path($oldMainPhoto->foto_path))) {
+                    unlink(public_path($oldMainPhoto->foto_path));
+                }
+                $oldMainPhoto->delete();
             }
 
-            $foto = $request->file('foto');
-            $filename = time() . '.' . $foto->getClientOriginalExtension();
-            $foto->move(public_path('uploads/kos'), $filename);
-            $data['foto'] = 'uploads/kos/' . $filename;
+            // Save new main photo
+            $mainPhoto = $request->file('foto_utama');
+            $mainPhotoName = time() . '_main.' . $mainPhoto->getClientOriginalExtension();
+            $mainPhoto->move(public_path('uploads/kos'), $mainPhotoName);
+
+            $kos->photos()->create([
+                'foto_path' => 'uploads/kos/' . $mainPhotoName,
+                'is_main' => true
+            ]);
+        }
+
+        // Handle additional photos
+        if ($request->hasFile('foto')) {
+            foreach($request->file('foto') as $photo) {
+                $photoName = time() . '_' . uniqid() . '.' . $photo->getClientOriginalExtension();
+                $photo->move(public_path('uploads/kos'), $photoName);
+
+                $kos->photos()->create([
+                    'foto_path' => 'uploads/kos/' . $photoName,
+                    'is_main' => false
+                ]);
+            }
         }
 
         $kos->update($data);
@@ -109,9 +162,12 @@ class PemilikController extends Controller
     {
         $kos = Kos::where('user_id', Auth::id())->findOrFail($id);
 
-        // Delete photo if exists
-        if ($kos->foto && file_exists(public_path($kos->foto))) {
-            unlink(public_path($kos->foto));
+        // Delete all photos
+        foreach($kos->photos as $photo) {
+            if (file_exists(public_path($photo->foto_path))) {
+                unlink(public_path($photo->foto_path));
+            }
+            $photo->delete();
         }
 
         $kos->delete();
@@ -377,5 +433,4 @@ class PemilikController extends Controller
 
         return Excel::download(new MessagesExport($startDate, $endDate, $statusKontak, $statusTransaksi), $filename);
     }
-
 }
