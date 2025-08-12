@@ -1,0 +1,15 @@
+
+services:
+  dws-host-renthouse:
+    build: .
+    ports:
+      - "8125:8000"
+    volumes:
+  # - .:/app
+      - ./storage:/app/storage
+      - ./public/uploads:/app/public/uploads
+      - ./database:/app/database
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1
+    # restart: unless-stopped
+
